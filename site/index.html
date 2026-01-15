@@ -1,0 +1,501 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Haven Institute</title>
+  <meta name="description" content="Haven Institute — a practical research studio for inner experience and Creative Physics." />
+  <meta name="theme-color" content="#0b1713" />
+  <style>
+    :root{
+      --bg:#0b1713;              /* deep forest */
+      --paper:#f3f0e8;           /* warm stone */
+      --ink:#0f1a15;
+      --muted:rgba(15,26,21,.68);
+      --line:rgba(15,26,21,.18);
+      --glass:rgba(243,240,232,.7);
+      --shadow: 0 18px 45px rgba(0,0,0,.35);
+      --radius: 18px;
+      --radius2: 26px;
+      --max: 1040px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: ui-serif, Georgia, "Times New Roman", Times, serif;
+      color:var(--paper);
+      background:
+        radial-gradient(1100px 700px at 20% 15%, rgba(243,240,232,.12), transparent 60%),
+        radial-gradient(900px 650px at 85% 25%, rgba(243,240,232,.09), transparent 55%),
+        linear-gradient(180deg, #07110e 0%, var(--bg) 45%, #060f0c 100%);
+      letter-spacing:.2px;
+    }
+
+    a{color:inherit; text-decoration:none}
+    a:hover{opacity:.92}
+
+    .wrap{max-width:var(--max); margin:0 auto; padding:28px 18px 80px}
+
+    /* Top bar */
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:20;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      background: linear-gradient(180deg, rgba(11,23,19,.86), rgba(11,23,19,.55));
+      border-bottom: 1px solid rgba(243,240,232,.12);
+    }
+    .topbar-inner{max-width:var(--max); margin:0 auto; padding:14px 18px; display:flex; align-items:center; gap:16px; justify-content:space-between}
+    .mark{display:flex; align-items:center; gap:10px}
+    .seal{
+      width:32px; height:32px; border-radius:10px;
+      background: rgba(243,240,232,.12);
+      border:1px solid rgba(243,240,232,.2);
+      display:grid; place-items:center;
+      box-shadow: 0 10px 28px rgba(0,0,0,.25);
+    }
+    .seal svg{opacity:.92}
+    .brand{line-height:1}
+    .brand b{display:block; font-size:13px; letter-spacing:.18em; text-transform:uppercase}
+    .brand span{display:block; font-size:12px; opacity:.78; margin-top:4px}
+
+    nav{display:flex; gap:14px; flex-wrap:wrap; justify-content:flex-end}
+    nav a{
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      font-size:12px;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      padding:9px 10px;
+      border-radius:999px;
+      border:1px solid transparent;
+      opacity:.9;
+    }
+    nav a:hover{border-color: rgba(243,240,232,.2); background: rgba(243,240,232,.06)}
+
+    /* Hero */
+    .hero{padding:48px 0 12px}
+    .hero-grid{display:grid; grid-template-columns: 1.35fr .65fr; gap:18px}
+    @media (max-width:900px){ .hero-grid{grid-template-columns:1fr; } }
+
+    .card{
+      border-radius: var(--radius2);
+      background:
+        linear-gradient(180deg, rgba(243,240,232,.08), rgba(243,240,232,.03));
+      border:1px solid rgba(243,240,232,.15);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      position:relative;
+    }
+
+    .card::before{
+      content:"";
+      position:absolute;
+      inset:-1px;
+      background:
+        radial-gradient(900px 420px at 10% 10%, rgba(243,240,232,.11), transparent 60%),
+        radial-gradient(760px 520px at 90% 20%, rgba(243,240,232,.08), transparent 55%);
+      pointer-events:none;
+    }
+
+    .hero-main{padding:34px 28px}
+    @media (max-width:520px){ .hero-main{padding:28px 18px} }
+
+    .kicker{
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      font-size:12px;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      opacity:.84;
+    }
+    h1{margin:10px 0 10px; font-size:54px; line-height:1.02; letter-spacing:-.02em}
+    @media (max-width:520px){ h1{font-size:40px} }
+
+    .lead{margin:10px 0 0; font-size:18px; line-height:1.55; opacity:.92; max-width:56ch}
+
+    .cta-row{margin-top:22px; display:flex; gap:12px; flex-wrap:wrap; align-items:center}
+    .btn{
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      font-size:12px;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+      padding:12px 14px;
+      border-radius: 999px;
+      border:1px solid rgba(243,240,232,.22);
+      background: rgba(243,240,232,.08);
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+    }
+    .btn.primary{background: rgba(243,240,232,.15); border-color: rgba(243,240,232,.32)}
+    .btn:active{transform: translateY(1px)}
+
+    .micro{
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      font-size:12px;
+      letter-spacing:.02em;
+      opacity:.8;
+    }
+
+    /* Side panel */
+    .panel{padding:18px 18px}
+    .panel h3{margin:4px 0 12px; font-size:14px; letter-spacing:.12em; text-transform:uppercase; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; opacity:.9}
+    .panel .block{border-radius:16px; border:1px solid rgba(243,240,232,.18); background: rgba(7,17,14,.32); padding:14px 14px; margin-bottom:12px}
+    .panel .block b{display:block; font-size:13px; letter-spacing:.12em; text-transform:uppercase; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; opacity:.92}
+    .panel .block p{margin:8px 0 0; font-size:15px; line-height:1.5; opacity:.9}
+
+    /* Sections */
+    section{padding:42px 0 0}
+    .section-head{display:flex; align-items:flex-end; justify-content:space-between; gap:14px; flex-wrap:wrap}
+    h2{margin:0; font-size:28px; letter-spacing:-.01em}
+    .sub{margin:0; font-size:14px; opacity:.82; max-width:68ch; line-height:1.6}
+
+    .grid{
+      margin-top:18px;
+      display:grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap:14px;
+    }
+    .tile{
+      grid-column: span 4;
+      border-radius: var(--radius);
+      border:1px solid rgba(243,240,232,.15);
+      background: rgba(243,240,232,.06);
+      padding:16px 16px;
+      position:relative;
+      overflow:hidden;
+    }
+    @media (max-width:900px){ .tile{grid-column: span 6;} }
+    @media (max-width:560px){ .tile{grid-column: span 12;} }
+
+    .tile::after{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background: radial-gradient(520px 260px at 12% 10%, rgba(243,240,232,.10), transparent 60%);
+      pointer-events:none;
+      opacity:.75;
+    }
+
+    .tile b{
+      display:block;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      font-size:12px;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      opacity:.9;
+    }
+    .tile p{margin:10px 0 0; font-size:16px; line-height:1.55; opacity:.92}
+
+    .quote{
+      margin-top:18px;
+      border-radius: var(--radius2);
+      border:1px solid rgba(243,240,232,.15);
+      background: rgba(243,240,232,.06);
+      padding:20px 18px;
+      display:flex;
+      gap:14px;
+      align-items:flex-start;
+    }
+    .quote .qmark{
+      width:34px; height:34px;
+      border-radius: 12px;
+      display:grid; place-items:center;
+      background: rgba(243,240,232,.10);
+      border:1px solid rgba(243,240,232,.18);
+      flex:0 0 auto;
+    }
+    .quote blockquote{margin:0; font-size:18px; line-height:1.6; opacity:.94}
+    .quote cite{display:block; margin-top:10px; font-style:normal; font-size:12px; letter-spacing:.16em; text-transform:uppercase; opacity:.75; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;}
+
+    /* Footer */
+    footer{padding:48px 0 18px; opacity:.86}
+    .foot{
+      border-top:1px solid rgba(243,240,232,.14);
+      padding-top:18px;
+      display:flex;
+      gap:10px;
+      justify-content:space-between;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+
+    .mono{
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size:12px;
+      opacity:.8;
+    }
+
+    /* Subtle motion */
+    @media (prefers-reduced-motion: no-preference){
+      .float{animation: float 7s ease-in-out infinite}
+      @keyframes float{ 0%,100%{transform: translateY(0)} 50%{transform: translateY(-6px)} }
+      .fadein{animation: fadein .7s ease both}
+      @keyframes fadein{ from{opacity:0; transform: translateY(8px)} to{opacity:1; transform: translateY(0)} }
+    }
+
+    /* Small utility */
+    .pill{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid rgba(243,240,232,.18);
+      background: rgba(243,240,232,.06);
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      font-size:11px;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      opacity:.88;
+    }
+
+    .divider{height:1px; background: rgba(243,240,232,.12); margin:22px 0}
+
+    /* Anchor spacing */
+    [id]{scroll-margin-top:80px}
+  </style>
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="mark" href="#top" aria-label="Haven Institute">
+        <div class="seal" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2.5v19" stroke="rgba(243,240,232,.9)" stroke-width="1.6" stroke-linecap="round"/>
+            <path d="M5 7.5c2.8-2.1 11.2-2.1 14 0" stroke="rgba(243,240,232,.9)" stroke-width="1.6" stroke-linecap="round"/>
+            <path d="M6.2 17.2c1.9 1.7 9.7 1.7 11.6 0" stroke="rgba(243,240,232,.9)" stroke-width="1.6" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="brand">
+          <b>Haven Institute</b>
+          <span>Creative Physics • inner experience • tending</span>
+        </div>
+      </a>
+
+      <nav aria-label="Site">
+        <a href="#idea">Idea</a>
+        <a href="#pillars">Pillars</a>
+        <a href="#models">Models</a>
+        <a href="#practices">Practices</a>
+        <a href="#collaborate">Collaborate</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top" class="wrap">
+
+    <div class="hero fadein">
+      <div class="hero-grid">
+
+        <div class="card hero-main">
+          <div class="kicker">A place to keep the ember</div>
+          <h1>Make meaning.<br/>Move slowly.<br/>Let it last.</h1>
+          <p class="lead">
+            Haven Institute is a practical research studio for <b>inner experience</b> —
+            how attention, emotion, meaning, and action synchronize in real time.
+            We build <b>Creative Physics</b>: simple language and practices that protect signal from spectacle.
+          </p>
+
+          <div class="cta-row">
+            <a class="btn primary" href="#collaborate">
+              Enter the Institute
+              <span aria-hidden="true">→</span>
+            </a>
+            <a class="btn" href="#models">
+              Read the models
+              <span aria-hidden="true">↘</span>
+            </a>
+            <span class="micro">Signal over spectacle • Wholeness before scale</span>
+          </div>
+
+          <div class="divider"></div>
+
+          <div style="display:flex; gap:10px; flex-wrap:wrap">
+            <span class="pill">Wattage</span>
+            <span class="pill">Radiant heat</span>
+            <span class="pill">Ignition → Glide → Create</span>
+            <span class="pill">Place-based clarity</span>
+          </div>
+        </div>
+
+        <aside class="card panel float" aria-label="Field panel">
+          <div class="panel">
+            <h3>Field Notes</h3>
+            <div class="block">
+              <b>Today’s question</b>
+              <p>What is the smallest true next act?</p>
+            </div>
+            <div class="block">
+              <b>Stop rule</b>
+              <p>When you feel performance rising, stop. Protect the ember.</p>
+            </div>
+            <div class="block">
+              <b>Orientation</b>
+              <p>Wholeness → Breadth → Purpose → Tending.</p>
+            </div>
+          </div>
+        </aside>
+
+      </div>
+    </div>
+
+    <section id="idea" class="fadein">
+      <div class="section-head">
+        <h2>The Idea</h2>
+        <p class="sub">We treat creativity as a living system — not a performance. We name the inner mechanics so the work can move cleanly, without distortion.</p>
+      </div>
+
+      <div class="quote" role="note">
+        <div class="qmark" aria-hidden="true">❖</div>
+        <div>
+          <blockquote>
+            Creative clarity happens when <b>feeling</b>, <b>meaning</b>, and <b>motion</b> align.
+            When they sync, pressure releases and the next step becomes obvious.
+          </blockquote>
+          <cite>Creative Physics — core alignment</cite>
+        </div>
+      </div>
+    </section>
+
+    <section id="pillars" class="fadein">
+      <div class="section-head">
+        <h2>Pillars</h2>
+        <p class="sub">A Yosemite-inspired restraint: fewer elements, each one considered. The goal is stability, warmth, and endurance.</p>
+      </div>
+
+      <div class="grid" aria-label="Pillars">
+        <div class="tile">
+          <b>Wholeness</b>
+          <p>No inner split. Your feeling, your words, and your actions tell the same story.</p>
+        </div>
+        <div class="tile">
+          <b>Breadth</b>
+          <p>Perception widens. You can hold multiple truths without losing the thread.</p>
+        </div>
+        <div class="tile">
+          <b>Telos</b>
+          <p>Purpose returns. Each step asks: what is this for, and what does it serve?</p>
+        </div>
+        <div class="tile">
+          <b>Tending</b>
+          <p>Endurance over intensity. Protect the ember so the fire lasts.</p>
+        </div>
+        <div class="tile">
+          <b>Signal</b>
+          <p>What’s true and alive. Felt before it is named. Never forced.</p>
+        </div>
+        <div class="tile">
+          <b>Restraint</b>
+          <p>We subtract what distorts. Scale is earned. Quiet carries farther than noise.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="models" class="fadein">
+      <div class="section-head">
+        <h2>Models</h2>
+        <p class="sub">Simple maps that reduce confusion. Use them. Change them. Keep only what clarifies.</p>
+      </div>
+
+      <div class="grid" aria-label="Models">
+        <div class="tile" style="grid-column: span 7;">
+          <b>Three-system alignment</b>
+          <p>
+            <b>Feeling</b> (what matters) + <b>Meaning</b> (what it means) + <b>Motion</b> (what happens next).
+            Misalignment creates overwhelm, stagnation, or emptiness.
+          </p>
+        </div>
+        <div class="tile" style="grid-column: span 5;">
+          <b>Ignition → Glide → Create</b>
+          <p>
+            Ignition: direction forms.<br/>
+            Glide: spaciousness opens.<br/>
+            Create: form appears.
+          </p>
+        </div>
+        <div class="tile" style="grid-column: span 12;">
+          <b>7-area brain map (functional)</b>
+          <p>
+            Brainstem (safety) • Cerebellum (timing) • Limbic (emotion) • Basal ganglia (habit) • Sensory cortex (noticing)
+            • Motor cortex (readiness) • Prefrontal cortex (meaning & language).
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="practices" class="fadein">
+      <div class="section-head">
+        <h2>Practices</h2>
+        <p class="sub">Small rituals that keep wattage clean. No optimization. Stewardship.</p>
+      </div>
+
+      <div class="grid" aria-label="Practices">
+        <div class="tile" style="grid-column: span 6;">
+          <b>Daily (10–30 min)</b>
+          <p>
+            1) Settle the system (breath + body).<br/>
+            2) Check Feeling / Meaning / Motion.<br/>
+            3) Do one clean act. Stop before depletion.
+          </p>
+        </div>
+        <div class="tile" style="grid-column: span 6;">
+          <b>Weekly (30–60 min)</b>
+          <p>
+            Review wattage leaks. Name the signal. Remove friction. Adjust pace — not ambition.
+          </p>
+        </div>
+        <div class="tile" style="grid-column: span 12;">
+          <b>The stop rule</b>
+          <p>
+            When you feel performance rising, stop. Rest protects wattage. Stopping early keeps the ember alive.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="collaborate" class="fadein">
+      <div class="section-head">
+        <h2>Collaborate</h2>
+        <p class="sub">If your work touches emotion, attention, meaning, or the nervous system — and you care about human-scale clarity — we should talk.</p>
+      </div>
+
+      <div class="grid" aria-label="Collaboration">
+        <div class="tile" style="grid-column: span 7;">
+          <b>Open an issue (recommended)</b>
+          <p>
+            In the GitHub repo, open an issue with:
+            who you are • what you’re building • what you want to test together.
+          </p>
+          <p class="mono" style="margin-top:10px">Template: /issues/new?title=Collaboration&body=Who%20are%20you%3F%0AWhat%20are%20you%20working%20on%3F%0AWhat%20should%20we%20test%20together%3F</p>
+        </div>
+        <div class="tile" style="grid-column: span 5;">
+          <b>North Star</b>
+          <p>
+            A language that makes people more whole.
+            A practice that makes creativity endure.
+          </p>
+          <div class="divider"></div>
+          <a class="btn" href="#top">Back to top <span aria-hidden="true">↑</span></a>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="foot">
+        <div>
+          <div class="mono">Haven Institute • v0.1</div>
+          <div style="opacity:.82; margin-top:6px">Signal over spectacle. Wholeness before scale.</div>
+        </div>
+        <div class="mono">© <span id="y"></span> • Built to be tended</div>
+      </div>
+    </footer>
+
+  </main>
+
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
