@@ -16,7 +16,6 @@
       --max:760px;
     }
     *{box-sizing:border-box}
-    html,body{height:100%}
     body{
       margin:0;
       background:var(--bg);
@@ -28,24 +27,16 @@
       text-rendering: optimizeLegibility;
     }
     a{color:inherit}
-    .wrap{max-width:var(--max); margin:0 auto; padding:28px 18px 72px}
-    header{padding:18px 0 10px}
-    .kicker{font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; letter-spacing:0.18em; text-transform:uppercase; font-size:12px; color:var(--muted)}
+    .wrap{max-width:var(--max); margin:0 auto; padding:22px 18px 72px}
+    header{padding:10px 0 6px}
+    .kicker{
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      letter-spacing:0.18em; text-transform:uppercase; font-size:12px; color:var(--muted)
+    }
     h1{margin:10px 0 8px; font-size:44px; letter-spacing:0.04em}
     .sub{margin:0; color:var(--muted); max-width:60ch}
-    .bar{display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin:18px 0 14px}
-    
-    .chip button{all:unset; cursor:pointer}
-    
-    
-    .search input{border:none; outline:none; width:100%; font-family: ui-sans-serif, system-ui; font-size:14px; background:transparent}
-    
-    .btn:focus{outline:2px solid var(--focus); outline-offset:2px}
-    nav{display:flex; gap:8px; flex-wrap:wrap; margin:0 0 14px}
-    nav a{font-family: ui-sans-serif, system-ui; font-size:13px; color:var(--muted); text-decoration:none; padding:8px 10px; border:1px solid var(--rule); border-radius:999px; background:#fff}
-    nav a:hover{color:#111}
     hr{border:none; border-top:1px solid var(--rule); margin:18px 0}
-    section{margin:26px 0}
+    section{margin:22px 0}
     .section-title{display:flex; align-items:baseline; justify-content:space-between; gap:10px}
     h2{margin:0; font-size:22px; letter-spacing:0.02em}
     .meta{font-family: ui-sans-serif, system-ui; font-size:12px; color:var(--muted)}
@@ -57,9 +48,6 @@
     .r-head{display:flex; align-items:baseline; justify-content:space-between; gap:10px; margin-bottom:6px}
     .r-num{font-family: ui-sans-serif, system-ui; font-size:12px; letter-spacing:0.18em; text-transform:uppercase; color:var(--muted)}
     .r-title{font-size:16px; margin:0}
-    
-    .mini{border:1px solid var(--rule); background:var(--chip); border-radius:10px; padding:6px 8px; font-family: ui-sans-serif, system-ui; font-size:12px; cursor:pointer}
-    .mini:focus{outline:2px solid var(--focus); outline-offset:2px}
     .r-body{margin:10px 0 0; white-space:pre-wrap}
     .hidden{display:none !important}
 
@@ -68,22 +56,32 @@
     .law .n{font-family: ui-sans-serif, system-ui; font-size:12px; color:var(--muted); letter-spacing:0.18em; text-transform:uppercase}
     .law .t{margin:6px 0 0; font-size:15px}
 
-    footer{margin-top:34px; color:var(--muted); font-family: ui-sans-serif, system-ui; font-size:12px}
+    .empty{
+      padding:14px;
+      border:1px dashed var(--rule);
+      border-radius:14px;
+      background:transparent;
+      color:var(--muted);
+      font-family: ui-sans-serif, system-ui;
+      font-size:13px;
+      margin:12px 0;
+    }
 
     @media (min-width: 720px){
       .laws{grid-template-columns: repeat(2, minmax(0, 1fr));}
     }
 
-    .pause{height:100vh}
-
-    /* Reader Mode (B) */
+    /* Reader Mode (default) */
     body.reader-on{overflow:hidden}
     body.reader-on .wrap{display:none}
     .reader{position:fixed; inset:0; background:var(--bg); color:var(--ink); display:none}
     body.reader-on .reader{display:block}
-    .reader-wrap{max-width:var(--max); margin:0 auto; height:100%; padding:28px 18px 28px; display:flex; flex-direction:column; gap:14px}
+    .reader-wrap{max-width:var(--max); margin:0 auto; height:100%; padding:22px 18px 22px; display:flex; flex-direction:column; gap:14px}
     .reader-top{display:flex; align-items:baseline; justify-content:space-between; gap:10px}
-    .reader-mark{font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; letter-spacing:0.18em; text-transform:uppercase; font-size:12px; color:var(--muted)}
+    .reader-mark{
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      letter-spacing:0.18em; text-transform:uppercase; font-size:12px; color:var(--muted)
+    }
     .reader-idx{font-family: ui-sans-serif, system-ui; font-size:12px; color:var(--muted)}
     .reader-card{flex:1; overflow:auto; background:#fff; border:1px solid var(--rule); border-radius:14px; padding:18px 16px}
     .reader-title{margin:0; font-size:18px}
@@ -95,7 +93,6 @@
 
     @media print{
       :root{--bg:#fff}
-      nav, .controls, .bar, .r-actions {display:none !important}
       body{background:#fff}
       .wrap{max-width: 6.5in; padding:0.6in}
       .reflection, .preface, .law{border:1px solid #ddd; break-inside:avoid; box-shadow:none}
@@ -104,19 +101,21 @@
   </style>
 </head>
 <body>
+
+  <!-- SCROLL / ARCHIVE VIEW -->
   <div class="wrap">
     <header>
       <div class="kicker">MONK</div>
       <h1>MONK</h1>
       <p class="sub">Field manuals for orientation. Manufactured, not performed.</p>
-</header>
+    </header>
 
     <hr />
 
     <section id="v1" aria-label="Volume I">
       <div class="section-title">
         <h2>VOLUME I</h2>
-        <div class="meta">33 Reflections</div>
+        <div class="meta" id="v1Count">0 Reflections</div>
       </div>
 
       <div class="preface" id="v1-preface">
@@ -124,10 +123,9 @@
         <p class="line">For use.</p>
       </div>
 
-      <div class="pause" aria-hidden="true"></div>
-
       <div id="v1-text" class="meta" style="margin:6px 0 10px">Text</div>
       <div id="v1List"></div>
+      <div id="v1Empty" class="empty hidden">No Volume I data loaded yet.</div>
     </section>
 
     <hr />
@@ -135,18 +133,21 @@
     <section id="v2" aria-label="Volume II">
       <div class="section-title">
         <h2>VOLUME II</h2>
-        <div class="meta">Stewardship</div>
+        <div class="meta" id="v2Meta">Stewardship</div>
       </div>
 
       <div id="v2-laws" class="meta" style="margin:12px 0 10px">33 Laws (headlines)</div>
       <div class="laws" id="lawsList"></div>
+      <div id="lawsEmpty" class="empty hidden">No Volume II laws loaded yet.</div>
 
       <div id="v2-text" class="meta" style="margin:18px 0 10px">Text</div>
       <div id="v2List"></div>
+      <div id="v2Empty" class="empty hidden">No Volume II text loaded yet.</div>
     </section>
-
-    
   </div>
+
+  <!-- Optional: if you later create data.js, uncomment this line -->
+  <!-- <script src="data.js"></script> -->
 
   <script>
     const roman = [
@@ -156,40 +157,40 @@
       "XXXI","XXXII","XXXIII"
     ];
 
-    // NOTE: Data arrays (volume1, volume2Laws, volume2) are defined above this script.
-
-    // ----------------------
-    // SCROLL MODE RENDER
-    // ----------------------
+    // Safe data access (prevents GitHub Pages crashes if arrays aren't present yet)
+    const V1 = Array.isArray(window.volume1) ? window.volume1 : [];
+    const V2LAWS = Array.isArray(window.volume2Laws) ? window.volume2Laws : [];
+    const V2 = Array.isArray(window.volume2) ? window.volume2 : [];
 
     const v1List = document.getElementById('v1List');
     const v2List = document.getElementById('v2List');
     const lawsList = document.getElementById('lawsList');
 
     function makeReflectionCard(ref, volumeKey){
-      const id = `${volumeKey}-${ref.n}`;
       const el = document.createElement('article');
       el.className = 'reflection';
-      el.id = id;
+      el.id = `${volumeKey}-${ref.n}`;
 
       const head = document.createElement('div');
       head.className = 'r-head';
 
       const left = document.createElement('div');
+
       const num = document.createElement('div');
       num.className = 'r-num';
-      num.textContent = `${volumeKey.toUpperCase()} · ${roman[ref.n-1]}`;
+      num.textContent = `${volumeKey.toUpperCase()} · ${roman[ref.n-1] || ref.n}`;
+
       const title = document.createElement('h3');
       title.className = 'r-title';
-      title.textContent = ref.title;
+      title.textContent = ref.title || '';
+
       left.appendChild(num);
       left.appendChild(title);
-
       head.appendChild(left);
 
       const body = document.createElement('div');
       body.className = 'r-body';
-      body.textContent = ref.body;
+      body.textContent = ref.body || '';
 
       el.appendChild(head);
       el.appendChild(body);
@@ -197,41 +198,53 @@
     }
 
     function renderScroll(){
+      // counts
+      const v1Count = document.getElementById('v1Count');
+      if(v1Count) v1Count.textContent = `${V1.length} Reflections`;
+
+      // V1
       if(v1List){
         v1List.innerHTML = '';
-        (window.volume1 || volume1).forEach(r => v1List.appendChild(makeReflectionCard(r,'v1')));
+        V1.forEach(r => v1List.appendChild(makeReflectionCard(r,'v1')));
       }
+      document.getElementById('v1Empty').classList.toggle('hidden', V1.length !== 0);
 
+      // Laws
       if(lawsList){
         lawsList.innerHTML = '';
-        (window.volume2Laws || volume2Laws).forEach((t, i) => {
+        V2LAWS.forEach((t, i) => {
           const card = document.createElement('div');
           card.className = 'law';
+
           const n = document.createElement('div');
           n.className = 'n';
-          n.textContent = `V2 · ${roman[i]}`;
+          n.textContent = `V2 · ${roman[i] || (i+1)}`;
+
           const tt = document.createElement('div');
           tt.className = 't';
           tt.textContent = t;
+
           card.appendChild(n);
           card.appendChild(tt);
           lawsList.appendChild(card);
         });
       }
+      document.getElementById('lawsEmpty').classList.toggle('hidden', V2LAWS.length !== 0);
 
+      // V2
       if(v2List){
         v2List.innerHTML = '';
-        (window.volume2 || volume2).forEach(r => v2List.appendChild(makeReflectionCard(r,'v2')));
+        V2.forEach(r => v2List.appendChild(makeReflectionCard(r,'v2')));
       }
+      document.getElementById('v2Empty').classList.toggle('hidden', V2.length !== 0);
     }
 
     // ----------------------
-    // READER MODE (B)
+    // READER MODE (default)
     // ----------------------
-
     const all = [];
-    (window.volume1 || volume1).forEach(r => all.push({key:'v1', n:r.n, title:r.title, body:r.body}));
-    (window.volume2 || volume2).forEach(r => all.push({key:'v2', n:r.n, title:r.title, body:r.body}));
+    V1.forEach(r => all.push({key:'v1', n:r.n, title:r.title, body:r.body}));
+    V2.forEach(r => all.push({key:'v2', n:r.n, title:r.title, body:r.body}));
 
     const readerEl = document.createElement('div');
     readerEl.className = 'reader';
@@ -262,11 +275,6 @@
     const prevBtn = readerEl.querySelector('#prevBtn');
     const nextBtn = readerEl.querySelector('#nextBtn');
 
-    function hashFor(i){
-      const r = all[i];
-      return `#${r.key}-${r.n}`;
-    }
-
     function indexFromHash(){
       const h = (location.hash || '').replace('#','').trim();
       if(!h) return 0;
@@ -283,17 +291,20 @@
     function show(i, opts={push:false}){
       idx = Math.max(0, Math.min(all.length-1, i));
       const r = all[idx];
-      readerIdx.textContent = `${idx+1} / ${all.length}`;
-      readerNum.textContent = `${r.key.toUpperCase()} · ${roman[r.n-1]}`;
-      readerTitle.textContent = r.title;
-      readerBody.textContent = r.body;
 
-      prevBtn.disabled = idx===0;
-      nextBtn.disabled = idx===all.length-1;
+      readerIdx.textContent = all.length ? `${idx+1} / ${all.length}` : `0 / 0`;
+      readerNum.textContent = all.length ? `${r.key.toUpperCase()} · ${roman[r.n-1] || r.n}` : `—`;
+      readerTitle.textContent = all.length ? (r.title || '') : `No data loaded`;
+      readerBody.textContent = all.length ? (r.body || '') : `Add window.volume1 / window.volume2 (or include data.js).`;
 
-      const h = hashFor(idx);
-      if(opts.push) history.pushState({idx}, '', h);
-      else history.replaceState({idx}, '', h);
+      prevBtn.disabled = idx===0 || all.length===0;
+      nextBtn.disabled = idx===all.length-1 || all.length===0;
+
+      if(all.length){
+        const h = `#${r.key}-${r.n}`;
+        if(opts.push) history.pushState({idx}, '', h);
+        else history.replaceState({idx}, '', h);
+      }
 
       readerCard.scrollTop = 0;
       readerCard.focus({preventScroll:true});
@@ -332,42 +343,16 @@
       document.body.classList.add('reader-on');
       show(indexFromHash(), {push:false});
     }
+    function exitReader(){ document.body.classList.remove('reader-on'); }
 
-    function exitReader(){
-      document.body.classList.remove('reader-on');
-    }
-
-    // Trigger:
-    // - append ?read=1 to URL
-    // - or press "r"
-    window.addEventListener('keydown', (e)=>{
-      if(e.key === 'r' || e.key === 'R'){
-        if(document.body.classList.contains('reader-on')) return;
-        enterReader();
-      }
-    });
-
-    window.addEventListener('popstate', ()=>{
-      if(!document.body.classList.contains('reader-on')) return;
-      show(indexFromHash(), {push:false});
-    });
-
-    // ----------------------
-    // BOOT
-    // ----------------------
-
+    // Boot
     renderScroll();
 
-    // Scroll hatch:
-    // - default: reader mode (tablet)
-    // - ?scroll=1 : scroll/archive view
+    // default: reader mode (tablet)
+    // ?scroll=1 : scroll/archive view
     const params = new URLSearchParams(location.search);
-    if(params.has('scroll')){
-      exitReader();
-    } else {
-      enterReader();
-    }
-
+    if(params.has('scroll')) exitReader();
+    else enterReader();
   </script>
 </body>
 </html>
