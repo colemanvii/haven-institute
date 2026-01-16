@@ -1,0 +1,470 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MONK</title>
+  <meta name="description" content="MONK — field manuals for orientation." />
+  <style>
+    :root{
+      --bg:#fbfaf7;
+      --ink:#111;
+      --muted:#6b6b6b;
+      --rule:#e7e2d8;
+      --chip:#f2eee7;
+      --focus:#0b57d0;
+      --max: 840px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--ink);
+      font-family: ui-serif, Georgia, "Times New Roman", Times, serif;
+      line-height:1.55;
+      letter-spacing:0.01em;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+    a{color:inherit}
+    .wrap{max-width:var(--max); margin:0 auto; padding:28px 18px 72px}
+    header{padding:18px 0 10px}
+    .kicker{font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; letter-spacing:0.18em; text-transform:uppercase; font-size:12px; color:var(--muted)}
+    h1{margin:10px 0 8px; font-size:44px; letter-spacing:0.04em}
+    .sub{margin:0; color:var(--muted); max-width:60ch}
+    .bar{display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin:18px 0 14px}
+    .chip{background:var(--chip); border:1px solid var(--rule); border-radius:999px; padding:7px 10px; font-family: ui-sans-serif, system-ui; font-size:12px; color:#1c1c1c}
+    .chip button{all:unset; cursor:pointer}
+    .controls{display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin:8px 0 22px}
+    .search{
+      flex:1;
+      min-width: 220px;
+      display:flex; align-items:center; gap:10px;
+      padding:10px 12px;
+      border:1px solid var(--rule);
+      border-radius:12px;
+      background:#fff;
+    }
+    .search input{border:none; outline:none; width:100%; font-family: ui-sans-serif, system-ui; font-size:14px; background:transparent}
+    .btn{
+      border:1px solid var(--rule);
+      background:#fff;
+      border-radius:12px;
+      padding:10px 12px;
+      font-family: ui-sans-serif, system-ui;
+      font-size:14px;
+      cursor:pointer;
+    }
+    .btn:focus{outline:2px solid var(--focus); outline-offset:2px}
+    nav{display:flex; gap:8px; flex-wrap:wrap; margin:0 0 14px}
+    nav a{font-family: ui-sans-serif, system-ui; font-size:13px; color:var(--muted); text-decoration:none; padding:8px 10px; border:1px solid var(--rule); border-radius:999px; background:#fff}
+    nav a:hover{color:#111}
+    hr{border:none; border-top:1px solid var(--rule); margin:18px 0}
+    section{margin:26px 0}
+    .section-title{display:flex; align-items:baseline; justify-content:space-between; gap:10px}
+    h2{margin:0; font-size:22px; letter-spacing:0.02em}
+    .meta{font-family: ui-sans-serif, system-ui; font-size:12px; color:var(--muted)}
+    .preface{padding:14px 14px; border:1px solid var(--rule); border-radius:14px; background:#fff; margin:12px 0 18px}
+    .preface .label{font-family: ui-sans-serif, system-ui; font-size:12px; color:var(--muted); letter-spacing:0.18em; text-transform:uppercase}
+    .preface .line{margin:8px 0 0; font-size:18px}
+
+    .reflection{padding:16px 14px; border:1px solid var(--rule); border-radius:14px; background:#fff; margin:12px 0}
+    .r-head{display:flex; align-items:baseline; justify-content:space-between; gap:10px; margin-bottom:6px}
+    .r-num{font-family: ui-sans-serif, system-ui; font-size:12px; letter-spacing:0.18em; text-transform:uppercase; color:var(--muted)}
+    .r-title{font-size:16px; margin:0}
+    .r-actions{display:flex; gap:8px}
+    .mini{border:1px solid var(--rule); background:var(--chip); border-radius:10px; padding:6px 8px; font-family: ui-sans-serif, system-ui; font-size:12px; cursor:pointer}
+    .mini:focus{outline:2px solid var(--focus); outline-offset:2px}
+    .r-body{margin:10px 0 0; white-space:pre-wrap}
+    .hidden{display:none !important}
+
+    .laws{display:grid; grid-template-columns: repeat(1, minmax(0, 1fr)); gap:10px}
+    .law{padding:12px 14px; border:1px solid var(--rule); border-radius:14px; background:#fff}
+    .law .n{font-family: ui-sans-serif, system-ui; font-size:12px; color:var(--muted); letter-spacing:0.18em; text-transform:uppercase}
+    .law .t{margin:6px 0 0; font-size:15px}
+
+    footer{margin-top:34px; color:var(--muted); font-family: ui-sans-serif, system-ui; font-size:12px}
+
+    @media (min-width: 720px){
+      .laws{grid-template-columns: repeat(2, minmax(0, 1fr));}
+    }
+
+    @media print{
+      :root{--bg:#fff}
+      nav, .controls, .bar, .r-actions {display:none !important}
+      body{background:#fff}
+      .wrap{max-width: 6.5in; padding:0.6in}
+      .reflection, .preface, .law{border:1px solid #ddd; break-inside:avoid; box-shadow:none}
+      a{text-decoration:none}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="kicker">MONK</div>
+      <h1>MONK</h1>
+      <p class="sub">Field manuals for orientation. Manufactured, not performed.</p>
+
+      <div class="bar" aria-label="Quick actions">
+        <span class="chip"><button data-jump="#v1">VOLUME I</button></span>
+        <span class="chip"><button data-jump="#v2">VOLUME II</button></span>
+        <span class="chip"><button id="btnPrint">PRINT</button></span>
+        <span class="chip" id="status" aria-live="polite">Ready.</span>
+      </div>
+
+      <div class="controls">
+        <div class="search" role="search">
+          <span aria-hidden="true">⌕</span>
+          <input id="q" type="search" placeholder="Search reflections…" autocomplete="off" />
+        </div>
+        <button class="btn" id="btnClear">Clear</button>
+        <button class="btn" id="btnCollapse">Collapse</button>
+        <button class="btn" id="btnExpand">Expand</button>
+      </div>
+
+      <nav aria-label="Sections">
+        <a href="#v1">Volume I</a>
+        <a href="#v1-text">Volume I · Text</a>
+        <a href="#v2">Volume II</a>
+        <a href="#v2-laws">Volume II · 33 Laws</a>
+        <a href="#v2-text">Volume II · Text</a>
+      </nav>
+    </header>
+
+    <hr />
+
+    <section id="v1" aria-label="Volume I">
+      <div class="section-title">
+        <h2>VOLUME I</h2>
+        <div class="meta">33 Reflections</div>
+      </div>
+
+      <div class="preface" id="v1-preface">
+        <div class="label">Preface</div>
+        <p class="line">For use.</p>
+      </div>
+
+      <div id="v1-text" class="meta" style="margin:6px 0 10px">Text</div>
+      <div id="v1List"></div>
+    </section>
+
+    <hr />
+
+    <section id="v2" aria-label="Volume II">
+      <div class="section-title">
+        <h2>VOLUME II</h2>
+        <div class="meta">Stewardship</div>
+      </div>
+
+      <div id="v2-laws" class="meta" style="margin:12px 0 10px">33 Laws (headlines)</div>
+      <div class="laws" id="lawsList"></div>
+
+      <div id="v2-text" class="meta" style="margin:18px 0 10px">Text (in progress)</div>
+      <div id="v2List"></div>
+
+      <div class="preface" style="margin-top:14px">
+        <div class="label">Note</div>
+        <p class="line" style="font-size:14px; color:var(--muted)">Volume II text is being written. Headlines are locked.</p>
+      </div>
+    </section>
+
+    <footer>
+      <hr />
+      <div>Manufacture rules: restraint, legibility, consistency. No ornament. No explanation.</div>
+    </footer>
+  </div>
+
+  <script>
+    const roman = [
+      "I","II","III","IV","V","VI","VII","VIII","IX","X",
+      "XI","XII","XIII","XIV","XV","XVI","XVII","XVIII","XIX","XX",
+      "XXI","XXII","XXIII","XXIV","XXV","XXVI","XXVII","XXVIII","XXIX","XXX",
+      "XXXI","XXXII","XXXIII"
+    ];
+
+    // ----------------------
+    // DATA (edit here)
+    // ----------------------
+
+    // Volume I currently contains Reflections 1–33.
+    // NOTE: Reflection XXIX and XXX were finalized after a truncation; they are included here in their final form.
+
+    const volume1 = [
+      { n:1, title:"Alignment Is Not Loud", body:`Most people think alignment feels like excitement.\nIt doesn’t.\n\nExcitement is sharp. Alignment is warm.\n\nAlignment is the quiet sensation that nothing inside you is arguing anymore.\nNo part of you is pulling against the direction you’re walking.\nYour body relaxes before your mind understands why.\n\nThis is why alignment is so often mistaken for boredom or fear.\nIt lacks drama. It offers no spectacle.\nIt does not announce itself with fireworks or applause.\n\nAlignment feels like finally putting something down you didn’t realize you were carrying.\n\nWhen you are aligned, you stop narrating your life in real time.\nYou stop asking how it looks.\nYou stop negotiating with imagined audiences.\n\nMovement becomes simple.\nNot easy—but simple.\n\nYou begin to notice that the right work asks for patience instead of urgency.\nIt does not rush you.\nIt waits.\n\nThe aligned life has a different tempo.\nIt moves at the speed of truth, not ambition.\nIt does not respond well to force.\n\nThis is why people abandon alignment just before it bears fruit.\nThey mistake its stillness for stagnation.\nThey reach for noise to reassure themselves they are alive.\n\nBut alignment is alive in a quieter way.\nIt feels like steady heat rather than flame.\nLike a river moving underground.\n\nIf you protect this feeling—if you stop leaking energy into performance, comparison, or unnecessary explanation—your life begins to organize itself around what matters.\n\nNot because you pushed it.\nBecause nothing inside you is resisting it anymore.`},
+      { n:2, title:"You Are What You Tend", body:`A life is not built by decisions alone.\nIt is built by attention.\n\nWhat you return to each day—thoughts, habits, worries, pleasures—slowly claims you.\nNot all at once.\nQuietly. Lawfully.\n\nThe soul does not argue with repetition.\nIt adapts.\n\nThis is why small compromises are more dangerous than big mistakes.\nBig mistakes shock you awake.\nSmall ones train you to sleep.\n\nYou do not wake up one morning far from yourself.\nYou drift.\n\nYou tend what feels familiar.\nYou revisit what soothes, even when it weakens you.\nYou repeat what numbs, even when it dims your clarity.\n\nAnd yet—this law cuts both ways.\n\nIf you tend stillness, stillness grows.\nIf you tend truth, truth strengthens.\nIf you tend your work with patience, the work begins to meet you halfway.\n\nThe discipline here is not severity.\nIt is fidelity.\n\nYou do not need to fix your entire life.\nYou need to stop abandoning the parts of yourself that already know the way.\n\nAttention is a form of love.\nWhat you love shapes you.\nWhat you neglect leaves.\n\nSo choose carefully what gets your morning mind, your tired evenings, your unguarded moments.\n\nNot everything that feels good deserves cultivation.\nNot everything that feels hard is harmful.\n\nOver time, your tending becomes your character.\nYour character becomes your destiny.\nNot by accident—but by devotion.`},
+      { n:3, title:"The Work Knows When You’re Ready", body:`There is a myth that creation responds to force.\nIt doesn’t.\n\nThe best work waits for coherence.\nIt waits until your inner life can hold it without distortion.\n\nThis is why rushing produces volume but not weight.\nWhy cleverness fades while sincerity endures.\nWhy some things cannot be made on demand.\n\nWhen you are not ready, you borrow energy—from stimulants, from pressure, from approval.\nThe result feels active but hollow.\nMovement without gravity.\n\nWhen you are ready, the work arrives differently.\nIt feels inevitable.\nLike something finishing itself through you.\n\nReadiness is not confidence.\nIt is containment.\n\nYou can feel it when your nervous system stops flinching.\nWhen your attention lengthens.\nWhen your desire becomes quieter but more precise.\n\nAt this point, effort changes texture.\nYou are no longer trying to prove anything.\nYou are simply showing up.\n\nThe work does not ask you to perform.\nIt asks you to stay.\n\nStay with the discomfort of not knowing.\nStay with the slowness of growth.\nStay with the ordinary days that carry no confirmation.\n\nThis is where most people leave.\nNot because they can’t do the work—\nbut because they can’t tolerate the silence before it speaks.\n\nIf you can, it will speak.\nAnd when it does, it will feel less like invention\nand more like recognition.`},
+      { n:4, title:"Stillness Is a Skill", body:`Stillness is not the absence of movement.\nIt is the absence of unnecessary movement.\n\nMost people think they are restless because they are ambitious.\nThey are restless because they are untrained.\n\nThe modern world mistakes stimulation for aliveness.\nIt teaches the nervous system to flinch at silence,\nto interpret quiet as danger,\nto fill every gap before meaning has a chance to form.\n\nBut stillness is not passive.\nIt is an active posture.\n\nIt is the skill of remaining present when nothing is happening yet.\nOf letting sensation, thought, and emotion rise without immediately acting on them.\nOf staying long enough for clarity to replace impulse.\n\nThis is why stillness feels uncomfortable at first.\nIt removes the usual exits.\nIt exposes the small anxieties we normally outrun.\n\nIn stillness, you begin to notice how often you move to avoid feeling unfinished.\nHow frequently you reach for distraction to reassure yourself you exist.\nHow much effort goes into escaping your own interior weather.\n\nBut if you stay—\nif you breathe, soften, and wait—\nthe storm passes.\n\nWhat remains is not emptiness but signal.\n\nStillness trains discernment.\nIt sharpens perception.\nIt reveals which thoughts are noise and which are instructions.\n\nWithout stillness, intuition is drowned out by urgency.\nWith it, direction becomes obvious without explanation.\n\nStillness does not slow life down.\nIt removes friction.\n\nYou stop reacting.\nYou start responding.`},
+      { n:5, title:"Nothing Real Is in a Hurry", body:`Hurry is a confession.\nIt admits fear.\n\nFear of missing out.\nFear of falling behind.\nFear that if you slow down, you’ll be overtaken, forgotten, erased.\n\nBut nothing that lasts is built under panic.\n\nTrees do not rush their rings.\nRivers do not sprint to the sea.\nThe body does not heal by force.\n\nHurry fractures attention.\nIt scatters energy across too many fronts.\nIt produces motion without coherence.\n\nThis is why hurried lives feel thin, even when they are full.\nWhy busy people often feel strangely absent from their own days.\nWhy speed rarely delivers satisfaction.\n\nWhen you move too fast, you outrun feedback.\nYou don’t notice what’s working until it breaks.\nYou don’t feel misalignment until the cost is high.\n\nSlowness, by contrast, is diagnostic.\nIt reveals what belongs and what doesn’t.\nIt lets reality answer you honestly.\n\nThe discipline here is trust.\nTrust that what is yours will not miss you.\nTrust that presence compounds.\nTrust that showing up fully outweighs showing up everywhere.\n\nNothing real is in a hurry.\nAnd nothing hurried feels real for long.`},
+      { n:6, title:"You Do Not Need to Be Seen Yet", body:`Visibility is not validation.\nIt only feels that way when identity is fragile.\n\nThere is a phase of growth that requires privacy.\nA protected interior season where roots deepen before branches spread.\nThis phase cannot be skipped without consequence.\n\nBeing seen too early warps development.\nIt introduces performance before mastery.\nIt teaches you to optimize for response instead of truth.\n\nThere is no shame in obscurity.\nIt is not a failure state.\nIt is a training ground.\n\nIn obscurity, you are free to be wrong without spectacle.\nTo change direction without explanation.\nTo build strength without comparison.\n\nDo not rush exposure.\nThere is power in staying hidden while you are still becoming.\nSeen too soon, a thing can break.\nGiven time, it can carry weight.`},
+      { n:7, title:"Discipline Is Devotion Made Visible", body:`Discipline is often misunderstood as punishment.\nIt isn’t.\n\nTrue discipline is love with a spine.\n\nIt is the quiet agreement you make with what matters most—\nand keep, even when the feeling changes.\n\nMotivation is unreliable.\nDiscipline stays.\n\nWhen discipline grows out of devotion, effort changes character.\nIt feels less like pushing and more like protecting.\n\nDiscipline removes negotiation.\nIt frees energy previously spent deciding.\nIt simplifies the inner world.\n\nYou do not need harsher rules.\nYou need clearer loyalties.\n\nDecide what you serve.\nThen let discipline quietly arrange your days around that choice.`},
+      { n:8, title:"Silence Teaches What Language Cannot", body:`There are truths older than words.\nThey wait to be felt.\n\nSilence is the medium where these truths surface.\n\nSilence trains listening.\nNot just to others, but to yourself.\n\nYou sense alignment before you can justify it.\nYou feel the right moment before it announces itself.\n\nA life without silence becomes reactive.\nIt fills every gap with commentary.\n\nSilence restores proportion.\nIt returns you to scale.\n\nSilence does not make you mute.\nIt teaches you what is worth saying.`},
+      { n:9, title:"Integrity Is Alignment Under Pressure", body:`Integrity is not morality.\nIt is coherence.\n\nIt is the state of remaining whole when circumstances apply force.\n\nIntegrity appears in small moments:\nchoosing accuracy over advantage,\nrest over depletion,\ntruth over image.\n\nIntegrity is not perfection.\nIt allows for error.\nIt requires correction.\n\nReturning matters more than maintaining appearance.\nRealignment rebuilds trust.\n\nPressure reveals structure.\nIntegrity ensures the structure holds.`},
+      { n:10, title:"Rest Is Part of the Work", body:`Rest is not a reward for finishing.\nIt is a condition for continuing.\n\nTrue rest is preventative.\nIt protects clarity before it collapses.\n\nWithout rest, work becomes extraction.\nYou take more than you restore.\n\nRest is stewardship.\nYou rest the way a craftsman maintains tools—\nnot to escape work, but to keep the work clean.`},
+      { n:11, title:"The Inner Life Is the Real Infrastructure", body:`Most people build their lives outward first.\nOnly later do they notice the strain underneath.\n\nBut the inner life is load-bearing.\nEverything rests on it.\n\nTending the inner life is foundational.\nIt means learning your rhythms, recognizing limits, respecting signals.\n\nAn ordered inner life simplifies the outer one.\nYou stop overbuilding.\nYou stop compensating.\n\nInfrastructure is not glamorous.\nBut nothing functions without it.`},
+      { n:12, title:"Patience Is Confidence in Disguise", body:`Impatience often pretends to be urgency.\nBut urgency is usually anxiety wearing productivity’s clothes.\n\nPatience is active endurance.\nIt is staying aligned while waiting occurs.\n\nPatience accumulates power quietly.\nIt creates space for quality.\n\nPatience is not waiting.\nIt is accuracy over time.`},
+      { n:13, title:"Begin Where You Are Standing", body:`Do not wait for ideal conditions.\nThey do not arrive.\n\nBegin where you are standing.\nWith the tools you have.\nWith the time available.\n\nYou do not need a full plan.\nYou need the next honest step.\n\nFeedback is instruction.\nStarting exposes weakness. That is its function.\n\nThose who begin become ready.`},
+      { n:14, title:"Remove What Drains You", body:`Not everything requires fixing.\nSome things require removal.\n\nBefore adding, remove.\n\nRemove commitments that no longer reflect your priorities.\nRemove inputs that fragment your attention.\nRemove relationships that require performance.\n\nPruning is intelligence.\nIt creates space.\nSpace restores signal.`},
+      { n:15, title:"Work Wants Regular Contact", body:`Work responds to consistency.\n\nOccasional bursts create motion, not progress.\nProgress requires return.\n\nShow up even when you don’t feel inspired.\nInspiration follows contact more often than it precedes it.\n\nReliability builds trust.\nFirst with the work.\nThen with yourself.`},
+      { n:16, title:"Do Not Confuse Movement With Progress", body:`Movement is easy to manufacture.\nProgress is not.\n\nProgress changes the underlying condition.\nMovement often avoids it.\n\nReal progress simplifies.\nIt reduces complexity.\nIt removes redundancy.\n\nStop. Reorient. Choose the action that alters structure.`},
+      { n:17, title:"Protect the Signal", body:`Not all information is useful.\nNot all feedback is relevant.\n\nSignal loss happens gradually—distraction, doubt, conformity.\n\nLimit exposure. Choose sources carefully.\nIf you notice yourself second-guessing what was clear, reduce input immediately.\n\nNoise promises awareness.\nSignal delivers direction.`},
+      { n:18, title:"Accept the Cost of Your Path", body:`Every path has a cost.\nNot choosing does not avoid it.\n\nDepth requires exclusion.\n\nCount the cost early.\nThen stop recounting it.\n\nWalk forward cleanly.\nDo not keep one foot in alternate futures.`},
+      { n:19, title:"Build for Durability, Not Applause", body:`Applause is volatile.\nDurability endures quietly.\n\nBuild for what holds when novelty fades.\n\nApplause feels good.\nDurability feels right.`},
+      { n:20, title:"Let Standards Do the Work", body:`Rules are labor-saving devices.\n\nA clear standard eliminates debate.\nIt protects quality without constant supervision.\n\nStandards should be few, simple, and enforced.\n\nWhen standards do the work, you are free to focus on substance.`},
+      { n:21, title:"Stay Small Long Enough to Be Precise", body:`Scale magnifies error.\nPrecision prevents it.\n\nStaying small allows adjustment.\n\nStay small until accuracy is automatic.\nThen grow without fear.`},
+      { n:22, title:"Choose Fewer Things and Care More", body:`Breadth dilutes care.\nDepth concentrates it.\n\nWith fewer commitments, attention lengthens.\nWork improves.\n\nA focused life feels quieter.\nBut it carries more meaning.`},
+      { n:23, title:"Learn the Difference Between Friction and Resistance", body:`Not all difficulty means stop.\n\nFriction teaches technique.\nResistance drains without teaching.\n\nAsk: is this sharpening me, or eroding me?\nPersist with friction. Reevaluate resistance.`},
+      { n:24, title:"Do Not Borrow Energy", body:`Borrowed energy is expensive.\nIt must be repaid—with interest.\n\nIf you cannot work without artificial ignition, stop.\nRestore the system.\n\nSustainable work is less dramatic.\nBut it endures.`},
+      { n:25, title:"Keep Your World Small and Well-Run", body:`A well-run small world is stronger than a poorly run large one.\n\nRun a world you can see all of.\nKeep it tight.\nKeep it honest.`},
+      { n:26, title:"Let Reality Correct You Early", body:`Reality is generous with feedback.\nIgnore it, and the cost increases.\n\nStrength adapts.\nCorrection is easiest early.\n\nTreat feedback as collaboration, not opposition.`},
+      { n:27, title:"Practice Without Witnesses", body:`The most important work happens unseen.\n\nUnwitnessed practice builds internal standards.\n\nProtect your practice.\nLet results speak later.`},
+      { n:28, title:"Do Not Explain Yourself Too Much", body:`Over-explanation weakens authority.\nIt invites negotiation.\n\nSay what is necessary.\nDo what you said.\nLet the outcome complete the sentence.`},
+      { n:29, title:"Treat Time as Material", body:`Time is material you shape through use.\n\nWasted time is usually misallocated—spent on things that do not compound.\n\nAsk: does this make future action cleaner, or heavier?\n\nTreat your hours like stock. Measure before cutting.\nProtect uninterrupted blocks. Finish what you start.\n\nBuild with time carefully. You do not get replacement stock.`},
+      { n:30, title:"Authority Comes From Coherence", body:`Authority is not asserted.\nIt is recognized.\n\nIt emerges when actions, words, and standards align over time.\n\nYou do not need to convince.\nYou need to align.\n\nAuthority follows alignment the way shadow follows form.`},
+      { n:31, title:"Stop Performing Your Life", body:`Performance splits attention: one part acts, another watches.\n\nStop performing.\nClose the gap between inner and outer action.\n\nDo what you believe is correct whether or not it is witnessed.\n\nA non-performed life feels quieter.\nBut it is heavier.`},
+      { n:32, title:"Live So That Nothing Needs Hiding", body:`A clean life is easier to maintain.\n\nHiding fragments attention.\nIt creates fear of exposure.\n\nIf something would not sit in the light, correct the action—not the visibility.\n\nA life without hiding moves forward cleanly.`},
+      { n:33, title:"Tend the Flame, Not the Smoke", body:`Smoke is visibility without substance.\nThe flame provides heat.\n\nTend what generates warmth.\nReduce what creates spectacle.\n\nIn time, people will find the fire.\nThey always do.`},
+    ];
+
+    const volume2Laws = [
+      "Do Not Take Responsibility You Cannot Carry",
+      "Finish What You Agree to Begin",
+      "Keep Overhead Low",
+      "Earn Cleanly or Do Not Earn",
+      "Let Money Amplify, Not Compensate",
+      "Authority Is a Burden Before It Is a Privilege",
+      "Decide Once, Then Execute",
+      "Absorb Pressure Without Transmitting It",
+      "Say No Early",
+      "End Things Cleanly",
+      "Do Not Negotiate Your Standards",
+      "Separate Urgency From Importance",
+      "Be Precise With Commitments",
+      "Choose Reliability Over Brilliance",
+      "Do Not Scale What You Cannot Supervise",
+      "Visibility Is a Tool, Not a Goal",
+      "Leave Rooms Better Than You Found Them",
+      "Let Consequences Teach",
+      "Speak Plainly About Money",
+      "Avoid Dependency—Yours and Theirs",
+      "Keep Power Boring",
+      "Refuse Misalignment Without Explanation",
+      "Protect the Long Term",
+      "Carry Weight Quietly",
+      "Build Trust Through Repetition",
+      "Do Not Confuse Growth With Health",
+      "Make Fewer Promises",
+      "Accept Delayed Reward",
+      "Be the Adult in the Room",
+      "Maintain Liquidity—Financial and Personal",
+      "Step Back Before You Burn Out",
+      "Do Not Abandon What Depends on You",
+      "Steward What You Are Given",
+    ];
+
+    // Volume II text currently contains Reflections 1–15.
+    const volume2 = [
+      { n:1, title:"Do Not Take Responsibility You Cannot Carry", body:`Responsibility has weight.\nIt is not abstract.\n\nWhen you accept responsibility, you accept ongoing obligation—\nattention, decision-making, follow-through, consequence.\n\nMany people say yes to responsibility because it flatters identity.\nThey want to be needed.\nThey want to appear capable.\n\nThis is how overload begins.\n\nTaking responsibility you cannot carry leads to resentment.\nResentment leads to negligence.\nNegligence damages trust.\n\nIt is better to decline cleanly than to accept and fail quietly.\n\nBefore agreeing, assess capacity honestly.\nNot ideal capacity—actual capacity.\nInclude fatigue, other obligations, and margin for error.\n\nIf you cannot carry it well, do not carry it at all.\n\nResponsibility taken lightly becomes a burden to others.\nResponsibility taken seriously becomes a stabilizing force.\n\nChoose carefully.`},
+      { n:2, title:"Finish What You Agree to Begin", body:`Agreement creates expectation.\nExpectation creates reliance.\n\nWhen you begin something, others orient around your follow-through—\neven if they do not say so.\n\nUnfinished work creates drag.\nIt occupies attention.\nIt complicates planning.\n\nFinishing is not about perfection.\nIt is about closure.\n\nA finished imperfect thing is more useful than an abandoned ideal one.\n\nIf you find yourself frequently starting and not finishing, reduce scope.\nYou are likely agreeing to more than you can sustain.\n\nCompletion builds credibility.\nCredibility compounds.\n\nIf you cannot finish, renegotiate early.\nDo not disappear.\nDo not delay explanation until damage is done.\n\nFinishing cleanly is a form of respect.`},
+      { n:3, title:"Keep Overhead Low", body:`Overhead is anything that requires maintenance before value is created.\n\nHigh overhead reduces flexibility.\nIt forces urgency.\nIt narrows options.\n\nThis applies to finances, systems, teams, and identity.\n\nWhen overhead rises, freedom drops.\nDecisions become reactive.\nCompromises multiply.\n\nLow overhead creates room to think.\nIt allows for patience.\nIt preserves leverage.\n\nBuild only what you can maintain calmly.\nIf something introduces constant pressure, question its necessity.\n\nOverhead should support work, not dominate it.\n\nKeep overhead low.\nIt is stewardship.`},
+      { n:4, title:"Earn Cleanly or Do Not Earn", body:`Money carries the imprint of how it was earned.\nClean money settles easily.\nDirty money creates drag.\n\nEarning cleanly means the exchange is fair, understood, and voluntary.\nNo manipulation.\nNo hidden costs.\nNo pressure disguised as opportunity.\n\nWhen money is earned poorly, it distorts judgment.\nYou begin protecting income instead of standards.\nYou justify what would otherwise feel wrong.\n\nClean earning simplifies life.\nYou sleep better.\nYou speak plainly.\nYou do not fear inspection.\n\nIf earning requires you to become someone you do not respect, refuse it.\nThe cost will exceed the payout.\n\nMoney amplifies the system it enters.\nEarn cleanly so it strengthens you.`},
+      { n:5, title:"Let Money Amplify, Not Compensate", body:`Money should increase what already works.\nIt should not be used to cover weakness.\n\nWhen money compensates, it props up fragile systems—\npoor communication, bad timing, weak craft, unclear thinking.\n\nWhen money amplifies, it accelerates strength.\nGood work reaches further.\nClear systems scale.\n\nBefore spending, ask:\nWhat is already functioning here?\nWhat would improve with more fuel?\n\nIf the answer is unclear, do not spend.\n\nFix structure first.\nThen let money extend reach.`},
+      { n:6, title:"Authority Is a Burden Before It Is a Privilege", body:`Authority increases responsibility before it increases freedom.\n\nWhen others rely on your decisions, mistakes carry weight.\nDelays cost more.\nAmbiguity spreads.\n\nAuthority should not be sought casually.\nIt is not status.\nIt is load.\n\nTrue authority absorbs consequence.\nIt takes responsibility without deflection.\nIt shields others from unnecessary pressure.\n\nIf authority feels like relief, you are not carrying it properly.\nIt should feel heavier, not lighter.\n\nCarry the burden first.\nThe rest comes—or it doesn’t.`},
+      { n:7, title:"Decide Once, Then Execute", body:`Indecision is expensive.\nIt consumes attention and delays momentum.\n\nGood decisions are rarely perfect.\nThey are sufficient and timely.\n\nOnce a decision is made with care, execute without re-litigation.\nSecond-guessing weakens resolve.\n\nThis does not mean ignoring new information.\nIt means not revisiting choices out of anxiety.\n\nDecide carefully.\nThen move.`},
+      { n:8, title:"Absorb Pressure Without Transmitting It", body:`Pressure travels downhill.\nIf you pass it along unchecked, it multiplies.\n\nStewardship requires containment.\nYou receive pressure, process it, and release only what is necessary.\n\nTransmit clarity, not tension.\nTransmit direction, not urgency.\n\nPressure handled well becomes leadership.`},
+      { n:9, title:"Say No Early", body:`Late refusals are costly.\nThey waste time and damage trust.\n\nSaying no early preserves relationships.\nIt keeps expectations realistic.\n\nIf you are uncertain, say so.\nDo not imply agreement while deciding privately.\n\nSay no when necessary.\nSay it cleanly.\nThen move on.`},
+      { n:10, title:"End Things Cleanly", body:`Endings deserve as much care as beginnings.\n\nWhen something is finished—work, agreements, relationships—\nletting it linger creates confusion.\n\nSay what is ending.\nSay when it is ending.\nThen follow through.\n\nClean endings preserve dignity.\nThey allow energy to return.`},
+      { n:11, title:"Do Not Negotiate Your Standards", body:`Standards only work if they are enforced.\n\nOnce you negotiate them, they become preferences.\nPreferences invite pressure.\nPressure erodes consistency.\n\nChange standards only when the system has changed.\nNever in the moment to relieve discomfort.\n\nHold standards calmly.\nConsistency does the persuading.`},
+      { n:12, title:"Separate Urgency From Importance", body:`Urgency demands immediate action.\nImportance determines long-term direction.\n\nUrgent matters shout.\nImportant matters wait.\n\nLearn to pause before responding.\nAsk what truly matters.\n\nHandle urgency efficiently.\nGuard importance fiercely.`},
+      { n:13, title:"Be Precise With Commitments", body:`Vague commitments create vague outcomes.\n\nPrecision defines scope.\nIt sets expectations.\n\nWhen you commit, specify:\nwhat will be done\nby when\nto what standard\n\nIf you cannot define a commitment clearly, do not make it.\nClarify before agreeing.\n\nSay less.\nMean exactly what you say.`},
+      { n:14, title:"Choose Reliability Over Brilliance", body:`Brilliance attracts attention.\nReliability earns trust.\n\nReliable people deliver consistently.\nThey show up.\nThey finish.\n\nReliability compounds quietly.\n\nBrilliance fades.\nReliability remains useful.`},
+      { n:15, title:"Do Not Scale What You Cannot Supervise", body:`Scale amplifies behavior.\nGood or bad.\n\nIf you cannot observe, correct, and support what you are expanding, do not expand it.\n\nUnsupervised scale produces drift.\nStandards erode.\nCulture fragments.\n\nHold scale until supervision is natural.\nThen expand deliberately.`},
+      { n:16, title:"Visibility Is a Tool, Not a Goal", body:`Visibility increases consequence.\n\nWhen you seek it for its own sake, judgment degrades.\nYou optimize for reaction instead of outcome.\n\nUse visibility when it serves the work.\nWithdraw when it distorts decision-making.\n\nAttention should follow substance, not replace it.\n\nVisibility is leverage.\nLeverage should be applied deliberately.`},
+      { n:17, title:"Leave Rooms Better Than You Found Them", body:`Stewardship is revealed in transitions.\n\nEnter cleanly.\nOperate respectfully.\nExit with order restored.\n\nThis applies to meetings, projects, teams, and places.\n\nSmall acts of care compound into reputation.\nNeglect compounds faster.\n\nImprove conditions quietly.\nDo not announce it.\n\nThose who leave things better are invited back.`},
+      { n:18, title:"Let Consequences Teach", body:`Intervening too early weakens learning.\n\nNot every mistake needs rescue.\nSome lessons require contact with consequence.\n\nState expectations clearly.\nThen allow outcomes to occur.\n\nThis builds responsibility faster than instruction alone.\n\nCorrect patterns, not people.\nLet reality do part of the teaching.`},
+      { n:19, title:"Speak Plainly About Money", body:`Money becomes dangerous when it is treated indirectly.\nVagueness creates misunderstanding.\nMisunderstanding creates resentment.\n\nSpeak plainly: price, scope, timing, terms, and what changes the price.\n\nClear numbers are kinder than soft language.\n\nIf you avoid money conversations, you will pay for that avoidance later.\n\nMoney is a tool for exchange and priority.\nKeep it clean by keeping it explicit.`},
+      { n:20, title:"Avoid Dependency—Yours and Theirs", body:`Dependency reduces freedom.\nIt distorts judgment.\n\nAvoid becoming dependent on any single client, platform, or relationship for stability.\n\nAlso avoid creating dependency in others.\n\nBuild systems where people can stand without you.\nBuild income where one loss does not collapse the structure.\n\nIndependence is stability, not isolation.`},
+      { n:21, title:"Keep Power Boring", body:`Power attracts performance.\nPerformance corrupts judgment.\n\nKeep power boring: no theatrics, no intimidation, no special rules.\n\nUse power to reduce chaos, not to increase control.\n\nWhen power is boring, people relax.\nWork improves.\n\nLet results speak.`},
+      { n:22, title:"Refuse Misalignment Without Explanation", body:`Misalignment does not require justification.\n\nExplaining it too much turns intuition into a debate.\nDebate invites compromise.\n\nA simple refusal preserves clarity.\n\nSay no once.\nSay it calmly.\nThen stop talking.`},
+      { n:23, title:"Protect the Long Term", body:`Short-term gains often borrow against the future.\n\nAsk whether a decision will still make sense over time.\n\nLong-term thinking simplifies choices.\n\nProtect durability over speed.`},
+      { n:24, title:"Carry Weight Quietly", body:`Responsibility does not need announcing.\n\nCarry weight without noise.\nLet steadiness speak.\n\nQuiet weight endures.`},
+      { n:25, title:"Build Trust Through Repetition", body:`Trust is created by return.\n\nRepeated reliability earns confidence.\n\nShow up.\nDo the work.\nRepeat.`},
+      { n:26, title:"Do Not Confuse Growth With Health", body:`A system can grow while becoming weaker.\n\nHealth is structural.\n\nPause growth that introduces constant urgency or compromise.`},
+      { n:27, title:"Make Fewer Promises", body:`Every promise consumes future capacity.\n\nUnder-promise.\nDeliver cleanly.`},
+      { n:28, title:"Accept Delayed Reward", body:`Immediate reward trains impatience.\nDelayed reward trains capacity.\n\nIf you need proof too early, you will distort the work to get it.\n\nPatience is investment with restraint.`},
+      { n:29, title:"Be the Adult in the Room", body:`Being the adult means being steady.\n\nSlow the pace.\nClarify.\nHold center.\n\nQuiet authority follows restraint.`},
+      { n:30, title:"Maintain Liquidity—Financial and Personal", body:`Liquidity is freedom of movement.\n\nMaintain reserves of cash, energy, time, and reputation.\n\nLeave room to move.`},
+      { n:31, title:"Step Back Before You Burn Out", body:`Burnout accumulates quietly.\n\nStep back early.\nRestore perspective before force replaces clarity.`},
+      { n:32, title:"Do Not Abandon What Depends on You", body:`If departure is necessary, exit responsibly.\n\nPrepare replacement.\nTransfer knowledge.\nLeave stability behind.`},
+      { n:33, title:"Steward What You Are Given", body:`Stewardship is temporary responsibility.\n\nUse what you are given well.\nLeave it improved if possible.`}
+    ];
+
+    // ----------------------
+    // RENDER
+    // ----------------------
+
+    const v1List = document.getElementById('v1List');
+    const v2List = document.getElementById('v2List');
+    const lawsList = document.getElementById('lawsList');
+    const status = document.getElementById('status');
+
+    function makeReflectionCard(ref, volumeKey){
+      const id = `${volumeKey}-${ref.n}`;
+      const el = document.createElement('article');
+      el.className = 'reflection';
+      el.dataset.title = ref.title.toLowerCase();
+      el.dataset.body = ref.body.toLowerCase();
+      el.id = id;
+
+      const head = document.createElement('div');
+      head.className = 'r-head';
+
+      const left = document.createElement('div');
+      const num = document.createElement('div');
+      num.className = 'r-num';
+      num.textContent = `${volumeKey.toUpperCase()} · ${roman[ref.n-1]}`;
+      const title = document.createElement('h3');
+      title.className = 'r-title';
+      title.textContent = ref.title;
+      left.appendChild(num);
+      left.appendChild(title);
+
+      const actions = document.createElement('div');
+      actions.className = 'r-actions';
+
+      const btnCopy = document.createElement('button');
+      btnCopy.className = 'mini';
+      btnCopy.textContent = 'Copy';
+      btnCopy.addEventListener('click', async () => {
+        const text = `${volumeKey.toUpperCase()} ${roman[ref.n-1]} — ${ref.title}\n\n${ref.body}`;
+        try{
+          await navigator.clipboard.writeText(text);
+          setStatus('Copied.');
+        }catch(e){
+          setStatus('Copy failed.');
+        }
+      });
+
+      const btnLink = document.createElement('button');
+      btnLink.className = 'mini';
+      btnLink.textContent = 'Link';
+      btnLink.addEventListener('click', async () => {
+        const url = `${location.origin}${location.pathname}#${id}`;
+        try{
+          await navigator.clipboard.writeText(url);
+          setStatus('Link copied.');
+        }catch(e){
+          setStatus('Link failed.');
+        }
+      });
+
+      actions.appendChild(btnCopy);
+      actions.appendChild(btnLink);
+
+      head.appendChild(left);
+      head.appendChild(actions);
+
+      const body = document.createElement('div');
+      body.className = 'r-body';
+      body.textContent = ref.body;
+
+      el.appendChild(head);
+      el.appendChild(body);
+      return el;
+    }
+
+    function render(){
+      v1List.innerHTML = '';
+      volume1.forEach(r => v1List.appendChild(makeReflectionCard(r,'v1')));
+
+      lawsList.innerHTML = '';
+      volume2Laws.forEach((t, i) => {
+        const card = document.createElement('div');
+        card.className = 'law';
+        card.dataset.title = t.toLowerCase();
+        const n = document.createElement('div');
+        n.className = 'n';
+        n.textContent = `V2 · ${roman[i]}`;
+        const tt = document.createElement('div');
+        tt.className = 't';
+        tt.textContent = t;
+        card.appendChild(n);
+        card.appendChild(tt);
+        lawsList.appendChild(card);
+      });
+
+      v2List.innerHTML = '';
+      volume2.forEach(r => v2List.appendChild(makeReflectionCard(r,'v2')));
+
+      setStatus('Ready.');
+    }
+
+    function setStatus(msg){
+      status.textContent = msg;
+      clearTimeout(setStatus._t);
+      setStatus._t = setTimeout(()=> status.textContent = 'Ready.', 1400);
+    }
+
+    // ----------------------
+    // SEARCH + UI
+    // ----------------------
+
+    const q = document.getElementById('q');
+    const btnClear = document.getElementById('btnClear');
+    const btnCollapse = document.getElementById('btnCollapse');
+    const btnExpand = document.getElementById('btnExpand');
+    const btnPrint = document.getElementById('btnPrint');
+
+    function applyFilter(term){
+      term = term.trim().toLowerCase();
+      const cards = document.querySelectorAll('.reflection');
+      const lawCards = document.querySelectorAll('.law');
+      let shown = 0;
+      cards.forEach(c => {
+        const hit = !term || c.dataset.title.includes(term) || c.dataset.body.includes(term);
+        c.classList.toggle('hidden', !hit);
+        if(hit) shown++;
+      });
+      lawCards.forEach(c => {
+        const hit = !term || c.dataset.title.includes(term);
+        c.classList.toggle('hidden', !hit);
+      });
+      setStatus(term ? `Filtered: ${shown} reflections.` : 'Ready.');
+    }
+
+    q.addEventListener('input', () => applyFilter(q.value));
+    btnClear.addEventListener('click', () => { q.value=''; applyFilter(''); q.focus(); });
+
+    btnCollapse.addEventListener('click', () => {
+      document.querySelectorAll('.reflection .r-body').forEach(b => b.classList.add('hidden'));
+      setStatus('Collapsed.');
+    });
+    btnExpand.addEventListener('click', () => {
+      document.querySelectorAll('.reflection .r-body').forEach(b => b.classList.remove('hidden'));
+      setStatus('Expanded.');
+    });
+
+    btnPrint.addEventListener('click', () => window.print());
+
+    // quick jump chips
+    document.querySelectorAll('[data-jump]').forEach(b => {
+      b.addEventListener('click', () => {
+        const sel = b.getAttribute('data-jump');
+        const el = document.querySelector(sel);
+        if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
+      });
+    });
+
+    // deep-link focus
+    window.addEventListener('hashchange', () => {
+      const id = location.hash.slice(1);
+      if(!id) return;
+      const el = document.getElementById(id);
+      if(el){ el.scrollIntoView({behavior:'smooth', block:'start'}); }
+    });
+
+    render();
+  </script>
+</body>
+</html>
