@@ -2,357 +2,179 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>MONK</title>
-  <meta name="description" content="MONK — field manuals for orientation." />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="color-scheme" content="dark light" />
+  <title>Haven Institute</title>
+  <meta name="description" content="A private network oriented around trust, presence, and long-term craft." />
   <style>
     :root{
-      --bg:#fbfaf7;
-      --ink:#111;
-      --muted:#6b6b6b;
-      --rule:#e7e2d8;
-      --chip:#f2eee7;
-      --focus:#0b57d0;
-      --max:760px;
+      --bg:#0b0f0e; --panel:#0f1513; --text:#e8efe9; --muted:#aab7ad;
+      --line:#233029; --accent:#86f1b5; --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --radius: 18px;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+    }
+    @media (prefers-color-scheme: light){
+      :root{ --bg:#f7faf8; --panel:#ffffff; --text:#0a0f0c; --muted:#44534a; --line:#d9e6dd; --accent:#0f7a45; --shadow: 0 10px 30px rgba(0,0,0,.08); }
     }
     *{box-sizing:border-box}
     body{
-      margin:0;
-      background:var(--bg);
-      color:var(--ink);
-      font-family: ui-serif, Georgia, "Times New Roman", Times, serif;
-      line-height:1.55;
-      letter-spacing:0.01em;
-      -webkit-font-smoothing: antialiased;
-      text-rendering: optimizeLegibility;
+      margin:0; font-family:var(--sans); background:var(--bg); color:var(--text);
+      line-height:1.55; letter-spacing:.1px;
     }
-    a{color:inherit}
-    .wrap{max-width:var(--max); margin:0 auto; padding:22px 18px 72px}
-    header{padding:10px 0 6px}
-    .kicker{
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
-      letter-spacing:0.18em; text-transform:uppercase; font-size:12px; color:var(--muted)
+    .wrap{max-width:980px; margin:0 auto; padding:28px 18px 60px}
+    header{
+      display:flex; gap:14px; align-items:flex-start; justify-content:space-between;
+      padding:18px 18px; border:1px solid var(--line); border-radius:var(--radius);
+      background:linear-gradient(180deg, rgba(134,241,181,.08), rgba(134,241,181,0));
+      box-shadow:var(--shadow);
     }
-    h1{margin:10px 0 8px; font-size:44px; letter-spacing:0.04em}
+    .brand{display:flex; flex-direction:column; gap:6px}
+    .kicker{font-family:var(--mono); color:var(--muted); font-size:12px; text-transform:uppercase; letter-spacing:.18em}
+    h1{margin:0; font-size:28px; letter-spacing:.2px}
     .sub{margin:0; color:var(--muted); max-width:60ch}
-    hr{border:none; border-top:1px solid var(--rule); margin:18px 0}
-    section{margin:22px 0}
-    .section-title{display:flex; align-items:baseline; justify-content:space-between; gap:10px}
-    h2{margin:0; font-size:22px; letter-spacing:0.02em}
-    .meta{font-family: ui-sans-serif, system-ui; font-size:12px; color:var(--muted)}
-    .preface{padding:14px 14px; border:1px solid var(--rule); border-radius:14px; background:#fff; margin:12px 0 18px}
-    .preface .label{font-family: ui-sans-serif, system-ui; font-size:12px; color:var(--muted); letter-spacing:0.18em; text-transform:uppercase}
-    .preface .line{margin:8px 0 0; font-size:18px}
-
-    .reflection{padding:16px 14px; border:1px solid var(--rule); border-radius:14px; background:#fff; margin:12px 0}
-    .r-head{display:flex; align-items:baseline; justify-content:space-between; gap:10px; margin-bottom:6px}
-    .r-num{font-family: ui-sans-serif, system-ui; font-size:12px; letter-spacing:0.18em; text-transform:uppercase; color:var(--muted)}
-    .r-title{font-size:16px; margin:0}
-    .r-body{margin:10px 0 0; white-space:pre-wrap}
-    .hidden{display:none !important}
-
-    .laws{display:grid; grid-template-columns: repeat(1, minmax(0, 1fr)); gap:10px}
-    .law{padding:12px 14px; border:1px solid var(--rule); border-radius:14px; background:#fff}
-    .law .n{font-family: ui-sans-serif, system-ui; font-size:12px; color:var(--muted); letter-spacing:0.18em; text-transform:uppercase}
-    .law .t{margin:6px 0 0; font-size:15px}
-
-    .empty{
-      padding:14px;
-      border:1px dashed var(--rule);
-      border-radius:14px;
-      background:transparent;
-      color:var(--muted);
-      font-family: ui-sans-serif, system-ui;
-      font-size:13px;
-      margin:12px 0;
+    nav{display:flex; flex-wrap:wrap; gap:10px; justify-content:flex-end}
+    a{color:inherit; text-decoration:none}
+    .btn{
+      display:inline-flex; align-items:center; gap:10px;
+      padding:10px 12px; border-radius:999px;
+      border:1px solid var(--line); background:rgba(255,255,255,.02);
+      font-family:var(--mono); font-size:12px; letter-spacing:.08em;
+      transition:transform .08s ease, border-color .12s ease, background .12s ease;
+      user-select:none;
     }
-
-    @media (min-width: 720px){
-      .laws{grid-template-columns: repeat(2, minmax(0, 1fr));}
+    .btn:hover{transform:translateY(-1px); border-color:rgba(134,241,181,.65); background:rgba(134,241,181,.08)}
+    .btn.primary{border-color:rgba(134,241,181,.75); background:rgba(134,241,181,.14)}
+    .grid{display:grid; grid-template-columns:1fr; gap:14px; margin-top:14px}
+    @media (min-width:860px){ .grid{grid-template-columns: 1.25fr .75fr} }
+    section{
+      padding:18px; border:1px solid var(--line); border-radius:var(--radius);
+      background:var(--panel); box-shadow:var(--shadow);
     }
-
-    /* Reader Mode (default) */
-    body.reader-on{overflow:hidden}
-    body.reader-on .wrap{display:none}
-    .reader{position:fixed; inset:0; background:var(--bg); color:var(--ink); display:none}
-    body.reader-on .reader{display:block}
-    .reader-wrap{max-width:var(--max); margin:0 auto; height:100%; padding:22px 18px 22px; display:flex; flex-direction:column; gap:14px}
-    .reader-top{display:flex; align-items:baseline; justify-content:space-between; gap:10px}
-    .reader-mark{
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
-      letter-spacing:0.18em; text-transform:uppercase; font-size:12px; color:var(--muted)
+    h2{margin:0 0 10px; font-size:15px; font-family:var(--mono); letter-spacing:.14em; text-transform:uppercase; color:var(--muted)}
+    .big{font-size:16px; margin:0 0 10px; max-width:72ch}
+    .rule{height:1px; background:var(--line); margin:14px 0}
+    .standing{
+      display:flex; flex-wrap:wrap; gap:10px; align-items:center;
+      font-family:var(--mono); letter-spacing:.08em; font-size:12px;
     }
-    .reader-idx{font-family: ui-sans-serif, system-ui; font-size:12px; color:var(--muted)}
-    .reader-card{flex:1; overflow:auto; background:#fff; border:1px solid var(--rule); border-radius:14px; padding:18px 16px}
-    .reader-title{margin:0; font-size:18px}
-    .reader-body{margin:12px 0 0; white-space:pre-wrap}
-    .reader-nav{display:flex; justify-content:space-between; gap:10px}
-    .reader-btn{border:1px solid var(--rule); background:#fff; border-radius:12px; padding:10px 12px; font-family: ui-sans-serif, system-ui; font-size:14px; cursor:pointer}
-    .reader-btn:focus{outline:2px solid var(--focus); outline-offset:2px}
-    .reader-btn[disabled]{opacity:.5; cursor:default}
-
-    @media print{
-      :root{--bg:#fff}
-      body{background:#fff}
-      .wrap{max-width: 6.5in; padding:0.6in}
-      .reflection, .preface, .law{border:1px solid #ddd; break-inside:avoid; box-shadow:none}
-      a{text-decoration:none}
+    .pill{
+      padding:6px 10px; border:1px solid var(--line); border-radius:999px;
+      background:rgba(255,255,255,.02);
     }
+    .note{margin:10px 0 0; color:var(--muted); font-size:13px}
+    ul{margin:10px 0 0 18px; padding:0}
+    li{margin:8px 0; color:var(--muted)}
+    footer{margin-top:14px; padding:18px; color:var(--muted); font-family:var(--mono); font-size:12px; letter-spacing:.06em}
+    code{font-family:var(--mono); font-size:12px}
   </style>
 </head>
 <body>
-
-  <!-- SCROLL / ARCHIVE VIEW -->
   <div class="wrap">
     <header>
-      <div class="kicker">MONK</div>
-      <h1>MONK</h1>
-      <p class="sub">Field manuals for orientation. Manufactured, not performed.</p>
+      <div class="brand">
+        <div class="kicker">Haven</div>
+        <h1>Haven Institute</h1>
+        <p class="sub">A private network oriented around trust, presence, and long-term craft.</p>
+      </div>
+      <nav aria-label="links">
+        <!-- Replace hrefs with your real URLs -->
+        <a class="btn" href="https://colem anvii.com" target="_blank" rel="noreferrer">ColemanVII</a>
+        <a class="btn" href="https://mintcondition.example" target="_blank" rel="noreferrer">Mint Condition</a>
+        <a class="btn" href="https://haven.example" target="_blank" rel="noreferrer">Haven</a>
+        <a class="btn" href="https://333westover.example" target="_blank" rel="noreferrer">333 Westover</a>
+        <a class="btn" href="https://github.com/YOUR-ORG/YOUR-REPO" target="_blank" rel="noreferrer">GitHub</a>
+      </nav>
     </header>
 
-    <hr />
+    <div class="grid">
+      <section>
+        <h2>Statement</h2>
+        <p class="big">
+          The Haven Institute is a private network oriented around trust, presence, and long-term craft.
+          Participation is not ranked publicly and cannot be optimized for. Standing within the Institute reflects
+          time, behavior, and the quality of one’s interactions with others. It is shaped quietly through contribution,
+          continuity, and relationship—not performance.
+        </p>
+        <p class="big">
+          We believe the most meaningful work and relationships emerge when people are protected from spectacle.
+          The Institute exists to preserve that environment.
+        </p>
 
-    <section id="v1" aria-label="Volume I">
-      <div class="section-title">
-        <h2>VOLUME I</h2>
-        <div class="meta" id="v1Count">0 Reflections</div>
-      </div>
+        <div class="rule"></div>
 
-      <div class="preface" id="v1-preface">
-        <div class="label">Preface</div>
-        <p class="line">For use.</p>
-      </div>
+        <h2>Standing</h2>
+        <div class="standing" aria-label="standing tiers">
+          <span class="pill">Introduced</span>
+          <span class="pill">Vouched</span>
+          <span class="pill">Established</span>
+          <span class="pill">Trusted</span>
+        </div>
+        <p class="note">
+          Standing is private. It changes slowly. No public scores. No comparison.
+        </p>
 
-      <div id="v1-text" class="meta" style="margin:6px 0 10px">Text</div>
-      <div id="v1List"></div>
-      <div id="v1Empty" class="empty hidden">No Volume I data loaded yet.</div>
-    </section>
+        <div class="rule"></div>
 
-    <hr />
+        <h2>Admissions</h2>
+        <p class="big">
+          Admission is selective and personal. The Institute grows slowly to protect its interior life.
+          We look for people who move carefully, take responsibility for their presence, and understand that trust is built over time.
+        </p>
+        <p class="big">
+          If invited, you are entering a place of listening, work, and mutual regard.
+        </p>
 
-    <section id="v2" aria-label="Volume II">
-      <div class="section-title">
-        <h2>VOLUME II</h2>
-        <div class="meta" id="v2Meta">Stewardship</div>
-      </div>
+        <div class="rule"></div>
 
-      <div id="v2-laws" class="meta" style="margin:12px 0 10px">33 Laws (headlines)</div>
-      <div class="laws" id="lawsList"></div>
-      <div id="lawsEmpty" class="empty hidden">No Volume II laws loaded yet.</div>
+        <h2>Actions</h2>
+        <div class="standing" style="margin-top:10px">
+          <!-- Replace these with your real destinations -->
+          <a class="btn primary" href="https://YOUR-DOMAIN/apply" target="_blank" rel="noreferrer">Apply / Accept Invitation</a>
+          <a class="btn" href="#patron">Become a Patron</a>
+        </div>
+        <p class="note">Keep it quiet. One door. One person at a time.</p>
+      </section>
 
-      <div id="v2-text" class="meta" style="margin:18px 0 10px">Text</div>
-      <div id="v2List"></div>
-      <div id="v2Empty" class="empty hidden">No Volume II text loaded yet.</div>
-    </section>
+      <section id="patron">
+        <h2>Patron of the Institute</h2>
+        <p class="big">
+          Patronage supports stewardship: infrastructure, human review, gatherings, and the long continuity of the house.
+        </p>
+        <p class="big">
+          Patronage does <strong>not</strong> affect admission, visibility, or standing. It is an act of care, not leverage.
+        </p>
+
+        <div class="rule"></div>
+
+        <h2>Support</h2>
+        <!-- Replace STRIPE_LINK with your real Stripe Payment Link -->
+        <a class="btn primary" href="STRIPE_LINK" target="_blank" rel="noreferrer">Become a Patron</a>
+        <p class="note">
+          Patronage supports stewardship. It does not confer status or access.
+        </p>
+
+        <div class="rule"></div>
+
+        <h2>Internal Mechanics</h2>
+        <ul>
+          <li><strong>Introduced:</strong> orientation phase; limited surface area.</li>
+          <li><strong>Vouched:</strong> private vouch(es) + steady participation.</li>
+          <li><strong>Established:</strong> continuity + completed interactions; human review gate.</li>
+          <li><strong>Trusted:</strong> long presence + repeated positive downstream impact; protected tier.</li>
+        </ul>
+        <p class="note">No gamification. Anti-gaming is invisible by design.</p>
+      </section>
+    </div>
+
+    <footer>
+      <div>© <span id="y"></span> Haven Institute</div>
+      <div style="margin-top:6px">Minimal. Durable. Orientation-first.</div>
+    </footer>
   </div>
 
-  <!-- Optional: if you later create data.js, uncomment this line -->
-  <!-- <script src="data.js"></script> -->
-
   <script>
-    const roman = [
-      "I","II","III","IV","V","VI","VII","VIII","IX","X",
-      "XI","XII","XIII","XIV","XV","XVI","XVII","XVIII","XIX","XX",
-      "XXI","XXII","XXIII","XXIV","XXV","XXVI","XXVII","XXVIII","XXIX","XXX",
-      "XXXI","XXXII","XXXIII"
-    ];
-
-    // Safe data access (prevents GitHub Pages crashes if arrays aren't present yet)
-    const V1 = Array.isArray(window.volume1) ? window.volume1 : [];
-    const V2LAWS = Array.isArray(window.volume2Laws) ? window.volume2Laws : [];
-    const V2 = Array.isArray(window.volume2) ? window.volume2 : [];
-
-    const v1List = document.getElementById('v1List');
-    const v2List = document.getElementById('v2List');
-    const lawsList = document.getElementById('lawsList');
-
-    function makeReflectionCard(ref, volumeKey){
-      const el = document.createElement('article');
-      el.className = 'reflection';
-      el.id = `${volumeKey}-${ref.n}`;
-
-      const head = document.createElement('div');
-      head.className = 'r-head';
-
-      const left = document.createElement('div');
-
-      const num = document.createElement('div');
-      num.className = 'r-num';
-      num.textContent = `${volumeKey.toUpperCase()} · ${roman[ref.n-1] || ref.n}`;
-
-      const title = document.createElement('h3');
-      title.className = 'r-title';
-      title.textContent = ref.title || '';
-
-      left.appendChild(num);
-      left.appendChild(title);
-      head.appendChild(left);
-
-      const body = document.createElement('div');
-      body.className = 'r-body';
-      body.textContent = ref.body || '';
-
-      el.appendChild(head);
-      el.appendChild(body);
-      return el;
-    }
-
-    function renderScroll(){
-      // counts
-      const v1Count = document.getElementById('v1Count');
-      if(v1Count) v1Count.textContent = `${V1.length} Reflections`;
-
-      // V1
-      if(v1List){
-        v1List.innerHTML = '';
-        V1.forEach(r => v1List.appendChild(makeReflectionCard(r,'v1')));
-      }
-      document.getElementById('v1Empty').classList.toggle('hidden', V1.length !== 0);
-
-      // Laws
-      if(lawsList){
-        lawsList.innerHTML = '';
-        V2LAWS.forEach((t, i) => {
-          const card = document.createElement('div');
-          card.className = 'law';
-
-          const n = document.createElement('div');
-          n.className = 'n';
-          n.textContent = `V2 · ${roman[i] || (i+1)}`;
-
-          const tt = document.createElement('div');
-          tt.className = 't';
-          tt.textContent = t;
-
-          card.appendChild(n);
-          card.appendChild(tt);
-          lawsList.appendChild(card);
-        });
-      }
-      document.getElementById('lawsEmpty').classList.toggle('hidden', V2LAWS.length !== 0);
-
-      // V2
-      if(v2List){
-        v2List.innerHTML = '';
-        V2.forEach(r => v2List.appendChild(makeReflectionCard(r,'v2')));
-      }
-      document.getElementById('v2Empty').classList.toggle('hidden', V2.length !== 0);
-    }
-
-    // ----------------------
-    // READER MODE (default)
-    // ----------------------
-    const all = [];
-    V1.forEach(r => all.push({key:'v1', n:r.n, title:r.title, body:r.body}));
-    V2.forEach(r => all.push({key:'v2', n:r.n, title:r.title, body:r.body}));
-
-    const readerEl = document.createElement('div');
-    readerEl.className = 'reader';
-    readerEl.innerHTML = `
-      <div class="reader-wrap" role="application" aria-label="Reading mode">
-        <div class="reader-top">
-          <div class="reader-mark">MONK</div>
-          <div class="reader-idx" id="readerIdx"></div>
-        </div>
-        <div class="reader-card" id="readerCard" tabindex="0">
-          <div class="r-num" id="readerNum"></div>
-          <h3 class="reader-title" id="readerTitle"></h3>
-          <div class="reader-body" id="readerBody"></div>
-        </div>
-        <div class="reader-nav">
-          <button class="reader-btn" id="prevBtn" aria-label="Previous">Prev</button>
-          <button class="reader-btn" id="nextBtn" aria-label="Next">Next</button>
-        </div>
-      </div>
-    `;
-    document.body.appendChild(readerEl);
-
-    const readerIdx = readerEl.querySelector('#readerIdx');
-    const readerNum = readerEl.querySelector('#readerNum');
-    const readerTitle = readerEl.querySelector('#readerTitle');
-    const readerBody = readerEl.querySelector('#readerBody');
-    const readerCard = readerEl.querySelector('#readerCard');
-    const prevBtn = readerEl.querySelector('#prevBtn');
-    const nextBtn = readerEl.querySelector('#nextBtn');
-
-    function indexFromHash(){
-      const h = (location.hash || '').replace('#','').trim();
-      if(!h) return 0;
-      const m = h.match(/^(v1|v2)-(\d{1,2})$/);
-      if(!m) return 0;
-      const key = m[1];
-      const n = parseInt(m[2],10);
-      const ii = all.findIndex(x => x.key===key && x.n===n);
-      return ii >= 0 ? ii : 0;
-    }
-
-    let idx = 0;
-
-    function show(i, opts={push:false}){
-      idx = Math.max(0, Math.min(all.length-1, i));
-      const r = all[idx];
-
-      readerIdx.textContent = all.length ? `${idx+1} / ${all.length}` : `0 / 0`;
-      readerNum.textContent = all.length ? `${r.key.toUpperCase()} · ${roman[r.n-1] || r.n}` : `—`;
-      readerTitle.textContent = all.length ? (r.title || '') : `No data loaded`;
-      readerBody.textContent = all.length ? (r.body || '') : `Add window.volume1 / window.volume2 (or include data.js).`;
-
-      prevBtn.disabled = idx===0 || all.length===0;
-      nextBtn.disabled = idx===all.length-1 || all.length===0;
-
-      if(all.length){
-        const h = `#${r.key}-${r.n}`;
-        if(opts.push) history.pushState({idx}, '', h);
-        else history.replaceState({idx}, '', h);
-      }
-
-      readerCard.scrollTop = 0;
-      readerCard.focus({preventScroll:true});
-    }
-
-    function next(){ if(idx < all.length-1) show(idx+1, {push:true}); }
-    function prev(){ if(idx > 0) show(idx-1, {push:true}); }
-
-    prevBtn.addEventListener('click', prev);
-    nextBtn.addEventListener('click', next);
-
-    window.addEventListener('keydown', (e) => {
-      if(!document.body.classList.contains('reader-on')) return;
-      const k = e.key;
-      if(k === 'ArrowRight' || k === 'ArrowDown' || k === 'j' || k === 'J' || k === ' '){ e.preventDefault(); next(); }
-      if(k === 'ArrowLeft' || k === 'ArrowUp' || k === 'k' || k === 'K'){ e.preventDefault(); prev(); }
-      if(k === 'Escape'){ e.preventDefault(); exitReader(); }
-    }, {passive:false});
-
-    let sx=null, sy=null;
-    readerEl.addEventListener('touchstart', (e)=>{
-      if(e.touches.length!==1) return;
-      sx=e.touches[0].clientX; sy=e.touches[0].clientY;
-    }, {passive:true});
-    readerEl.addEventListener('touchend', (e)=>{
-      if(sx===null || sy===null) return;
-      const dx = e.changedTouches[0].clientX - sx;
-      const dy = e.changedTouches[0].clientY - sy;
-      sx=sy=null;
-      if(Math.abs(dx) < 60 || Math.abs(dx) < Math.abs(dy)) return;
-      if(dx < 0) next();
-      else prev();
-    }, {passive:true});
-
-    function enterReader(){
-      document.body.classList.add('reader-on');
-      show(indexFromHash(), {push:false});
-    }
-    function exitReader(){ document.body.classList.remove('reader-on'); }
-
-    // Boot
-    renderScroll();
-
-    // default: reader mode (tablet)
-    // ?scroll=1 : scroll/archive view
-    const params = new URLSearchParams(location.search);
-    if(params.has('scroll')) exitReader();
-    else enterReader();
+    document.getElementById("y").textContent = new Date().getFullYear();
   </script>
 </body>
 </html>
