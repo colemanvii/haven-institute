@@ -1,180 +1,287 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Coleman VII — Gateway</title>
   <meta name="color-scheme" content="dark light" />
-  <title>Haven Institute</title>
-  <meta name="description" content="A private network oriented around trust, presence, and long-term craft." />
   <style>
     :root{
-      --bg:#0b0f0e; --panel:#0f1513; --text:#e8efe9; --muted:#aab7ad;
-      --line:#233029; --accent:#86f1b5; --shadow: 0 10px 30px rgba(0,0,0,.35);
-      --radius: 18px;
-      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-      --sans: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      --bg:#070A0B;
+      --bg2:#050607;
+      --card:rgba(255,255,255,.04);
+      --card2:rgba(255,255,255,.03);
+      --border:rgba(255,255,255,.10);
+      --text:#F5F7FA;
+      --muted:rgba(245,247,250,.62);
+      --shadow:0 18px 60px rgba(0,0,0,.55);
+      --accent:#E4A24A;
+      --accent2:rgba(228,162,74,.28);
+      --radius:22px;
+      --radius2:16px;
+      --max:520px;
+      --pad:22px;
+      --font: ui-serif, "Iowan Old Style", "Palatino Linotype", Palatino, Garamond, serif;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
     }
-    @media (prefers-color-scheme: light){
-      :root{ --bg:#f7faf8; --panel:#ffffff; --text:#0a0f0c; --muted:#44534a; --line:#d9e6dd; --accent:#0f7a45; --shadow: 0 10px 30px rgba(0,0,0,.08); }
+
+    [data-theme="light"]{
+      --bg:#F7FBFF;          /* arctic white */
+      --bg2:#EFF6FF;
+      --card:#FFFFFF;
+      --card2:#FFFFFF;
+      --border:rgba(15,23,42,.08);
+      --text:#0B1220;
+      --muted:rgba(11,18,32,.60);
+      --shadow:0 18px 60px rgba(2,6,23,.10);
+      --accent:#E4A24A;
+      --accent2:rgba(228,162,74,.22);
     }
+
     *{box-sizing:border-box}
+    html,body{height:100%}
     body{
-      margin:0; font-family:var(--sans); background:var(--bg); color:var(--text);
-      line-height:1.55; letter-spacing:.1px;
+      margin:0;
+      font-family:var(--sans);
+      color:var(--text);
+      background:
+        radial-gradient(1200px 600px at 20% 10%, rgba(228,162,74,.10), transparent 50%),
+        radial-gradient(900px 500px at 80% 30%, rgba(255,255,255,.06), transparent 55%),
+        linear-gradient(180deg, var(--bg), var(--bg2));
+      display:grid;
+      place-items:center;
+      padding:28px 16px;
     }
-    .wrap{max-width:980px; margin:0 auto; padding:28px 18px 60px}
-    header{
-      display:flex; gap:14px; align-items:flex-start; justify-content:space-between;
-      padding:18px 18px; border:1px solid var(--line); border-radius:var(--radius);
-      background:linear-gradient(180deg, rgba(134,241,181,.08), rgba(134,241,181,0));
-      box-shadow:var(--shadow);
+
+    .shell{
+      width:min(var(--max), 100%);
     }
-    .brand{display:flex; flex-direction:column; gap:6px}
-    .kicker{font-family:var(--mono); color:var(--muted); font-size:12px; text-transform:uppercase; letter-spacing:.18em}
-    h1{margin:0; font-size:28px; letter-spacing:.2px}
-    .sub{margin:0; color:var(--muted); max-width:60ch}
-    nav{display:flex; flex-wrap:wrap; gap:10px; justify-content:flex-end}
-    a{color:inherit; text-decoration:none}
-    .btn{
-      display:inline-flex; align-items:center; gap:10px;
-      padding:10px 12px; border-radius:999px;
-      border:1px solid var(--line); background:rgba(255,255,255,.02);
-      font-family:var(--mono); font-size:12px; letter-spacing:.08em;
-      transition:transform .08s ease, border-color .12s ease, background .12s ease;
+
+    .topbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      margin-bottom:14px;
+    }
+
+    .brand{
+      display:flex;
+      flex-direction:column;
+      gap:6px;
+      letter-spacing:.22em;
+      text-transform:uppercase;
+      font-size:12px;
+      color:var(--muted);
+    }
+
+    .mode{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      padding:10px 12px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:color-mix(in srgb, var(--card) 80%, transparent);
+      box-shadow:0 10px 30px rgba(0,0,0,.12);
+      backdrop-filter: blur(10px);
+    }
+
+    .mode span{
+      font-size:12px;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      color:var(--muted);
+      font-weight:600;
       user-select:none;
     }
-    .btn:hover{transform:translateY(-1px); border-color:rgba(134,241,181,.65); background:rgba(134,241,181,.08)}
-    .btn.primary{border-color:rgba(134,241,181,.75); background:rgba(134,241,181,.14)}
-    .grid{display:grid; grid-template-columns:1fr; gap:14px; margin-top:14px}
-    @media (min-width:860px){ .grid{grid-template-columns: 1.25fr .75fr} }
-    section{
-      padding:18px; border:1px solid var(--line); border-radius:var(--radius);
-      background:var(--panel); box-shadow:var(--shadow);
+
+    .switch{
+      width:44px;
+      height:26px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      background:color-mix(in srgb, var(--bg) 75%, var(--card));
+      position:relative;
+      cursor:pointer;
+      outline:none;
     }
-    h2{margin:0 0 10px; font-size:15px; font-family:var(--mono); letter-spacing:.14em; text-transform:uppercase; color:var(--muted)}
-    .big{font-size:16px; margin:0 0 10px; max-width:72ch}
-    .rule{height:1px; background:var(--line); margin:14px 0}
-    .standing{
-      display:flex; flex-wrap:wrap; gap:10px; align-items:center;
-      font-family:var(--mono); letter-spacing:.08em; font-size:12px;
+    .knob{
+      position:absolute;
+      top:3px;
+      left:3px;
+      width:20px;
+      height:20px;
+      border-radius:50%;
+      background:var(--text);
+      opacity:.9;
+      transition:transform .18s ease, background .18s ease, opacity .18s ease;
     }
-    .pill{
-      padding:6px 10px; border:1px solid var(--line); border-radius:999px;
-      background:rgba(255,255,255,.02);
+    [data-theme="light"] .knob{
+      transform:translateX(18px);
+      background:#0B1220;
+      opacity:.85;
     }
-    .note{margin:10px 0 0; color:var(--muted); font-size:13px}
-    ul{margin:10px 0 0 18px; padding:0}
-    li{margin:8px 0; color:var(--muted)}
-    footer{margin-top:14px; padding:18px; color:var(--muted); font-family:var(--mono); font-size:12px; letter-spacing:.06em}
-    code{font-family:var(--mono); font-size:12px}
+
+    .card{
+      border-radius:var(--radius);
+      border:1px solid var(--border);
+      background:linear-gradient(180deg, color-mix(in srgb, var(--card) 92%, transparent), color-mix(in srgb, var(--card2) 92%, transparent));
+      box-shadow:var(--shadow);
+      padding:var(--pad);
+      backdrop-filter: blur(12px);
+    }
+
+    .title{
+      font-family:var(--font);
+      font-weight:700;
+      font-size:54px;
+      line-height:1.02;
+      margin:8px 0 18px;
+      letter-spacing:-.02em;
+    }
+
+    .subtitle{
+      font-family:var(--sans);
+      font-size:12px;
+      letter-spacing:.22em;
+      text-transform:uppercase;
+      color:var(--muted);
+      margin:0;
+    }
+
+    .stack{
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+      margin-top:18px;
+    }
+
+    .btn{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      width:100%;
+      padding:18px 18px;
+      border-radius:var(--radius2);
+      border:1px solid var(--border);
+      background:color-mix(in srgb, var(--card) 85%, transparent);
+      text-decoration:none;
+      color:var(--text);
+      transition:transform .08s ease, border-color .12s ease, background .12s ease;
+    }
+    .btn:active{transform:translateY(1px)}
+    .btn .label{
+      font-family:var(--font);
+      font-weight:650;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      font-size:22px;
+    }
+    .btn .arrow{
+      font-family:var(--sans);
+      font-weight:700;
+      opacity:.65;
+      font-size:20px;
+      transform:translateY(-1px);
+    }
+
+    .btn.primary{
+      border-color:var(--accent2);
+      box-shadow:0 0 0 1px color-mix(in srgb, var(--accent) 45%, transparent) inset;
+    }
+    .btn.primary:hover{
+      border-color:color-mix(in srgb, var(--accent) 75%, transparent);
+      background:color-mix(in srgb, var(--accent2) 35%, var(--card));
+    }
+    .btn:hover{
+      border-color:color-mix(in srgb, var(--border) 70%, var(--text) 10%);
+      background:color-mix(in srgb, var(--card) 92%, transparent);
+    }
+
+    .foot{
+      margin-top:14px;
+      color:var(--muted);
+      font-size:12px;
+      letter-spacing:.02em;
+    }
+
+    /* mobile tightening */
+    @media (max-width:420px){
+      .title{font-size:48px}
+      .btn .label{font-size:20px}
+    }
   </style>
 </head>
+
 <body>
-  <div class="wrap">
-    <header>
+  <main class="shell">
+    <div class="topbar">
       <div class="brand">
-        <div class="kicker">Haven</div>
-        <h1>Haven Institute</h1>
-        <p class="sub">A private network oriented around trust, presence, and long-term craft.</p>
+        <div>COLEMAN VII</div>
       </div>
-      <nav aria-label="links">
-        <!-- Replace hrefs with your real URLs -->
-        <a class="btn" href="https://colem anvii.com" target="_blank" rel="noreferrer">ColemanVII</a>
-        <a class="btn" href="https://mintcondition.example" target="_blank" rel="noreferrer">Mint Condition</a>
-        <a class="btn" href="https://haven.example" target="_blank" rel="noreferrer">Haven</a>
-        <a class="btn" href="https://333westover.example" target="_blank" rel="noreferrer">333 Westover</a>
-        <a class="btn" href="https://github.com/YOUR-ORG/YOUR-REPO" target="_blank" rel="noreferrer">GitHub</a>
-      </nav>
-    </header>
 
-    <div class="grid">
-      <section>
-        <h2>Statement</h2>
-        <p class="big">
-          The Haven Institute is a private network oriented around trust, presence, and long-term craft.
-          Participation is not ranked publicly and cannot be optimized for. Standing within the Institute reflects
-          time, behavior, and the quality of one’s interactions with others. It is shaped quietly through contribution,
-          continuity, and relationship—not performance.
-        </p>
-        <p class="big">
-          We believe the most meaningful work and relationships emerge when people are protected from spectacle.
-          The Institute exists to preserve that environment.
-        </p>
-
-        <div class="rule"></div>
-
-        <h2>Standing</h2>
-        <div class="standing" aria-label="standing tiers">
-          <span class="pill">Introduced</span>
-          <span class="pill">Vouched</span>
-          <span class="pill">Established</span>
-          <span class="pill">Trusted</span>
+      <button class="mode" id="modeBtn" type="button" aria-label="Toggle theme">
+        <span id="modeLabel">Dark</span>
+        <div class="switch" aria-hidden="true">
+          <div class="knob"></div>
         </div>
-        <p class="note">
-          Standing is private. It changes slowly. No public scores. No comparison.
-        </p>
-
-        <div class="rule"></div>
-
-        <h2>Admissions</h2>
-        <p class="big">
-          Admission is selective and personal. The Institute grows slowly to protect its interior life.
-          We look for people who move carefully, take responsibility for their presence, and understand that trust is built over time.
-        </p>
-        <p class="big">
-          If invited, you are entering a place of listening, work, and mutual regard.
-        </p>
-
-        <div class="rule"></div>
-
-        <h2>Actions</h2>
-        <div class="standing" style="margin-top:10px">
-          <!-- Replace these with your real destinations -->
-          <a class="btn primary" href="https://YOUR-DOMAIN/apply" target="_blank" rel="noreferrer">Apply / Accept Invitation</a>
-          <a class="btn" href="#patron">Become a Patron</a>
-        </div>
-        <p class="note">Keep it quiet. One door. One person at a time.</p>
-      </section>
-
-      <section id="patron">
-        <h2>Patron of the Institute</h2>
-        <p class="big">
-          Patronage supports stewardship: infrastructure, human review, gatherings, and the long continuity of the house.
-        </p>
-        <p class="big">
-          Patronage does <strong>not</strong> affect admission, visibility, or standing. It is an act of care, not leverage.
-        </p>
-
-        <div class="rule"></div>
-
-        <h2>Support</h2>
-        <!-- Replace STRIPE_LINK with your real Stripe Payment Link -->
-        <a class="btn primary" href="STRIPE_LINK" target="_blank" rel="noreferrer">Become a Patron</a>
-        <p class="note">
-          Patronage supports stewardship. It does not confer status or access.
-        </p>
-
-        <div class="rule"></div>
-
-        <h2>Internal Mechanics</h2>
-        <ul>
-          <li><strong>Introduced:</strong> orientation phase; limited surface area.</li>
-          <li><strong>Vouched:</strong> private vouch(es) + steady participation.</li>
-          <li><strong>Established:</strong> continuity + completed interactions; human review gate.</li>
-          <li><strong>Trusted:</strong> long presence + repeated positive downstream impact; protected tier.</li>
-        </ul>
-        <p class="note">No gamification. Anti-gaming is invisible by design.</p>
-      </section>
+      </button>
     </div>
 
-    <footer>
-      <div>© <span id="y"></span> Haven Institute</div>
-      <div style="margin-top:6px">Minimal. Durable. Orientation-first.</div>
-    </footer>
-  </div>
+    <section class="card" role="region" aria-label="Gateway">
+      <p class="subtitle">COLEMAN VII</p>
+      <h1 class="title">Gateway</h1>
+
+      <div class="stack">
+        <a class="btn primary" href="#" aria-label="Haven">
+          <span class="label">Haven</span>
+          <span class="arrow">→</span>
+        </a>
+
+        <a class="btn" href="#" aria-label="Westover">
+          <span class="label">Westover</span>
+          <span class="arrow">→</span>
+        </a>
+
+        <a class="btn" href="#" aria-label="Festina Lente">
+          <span class="label">Festina Lente</span>
+          <span class="arrow">→</span>
+        </a>
+
+        <a class="btn" href="#" aria-label="Mint Condition">
+          <span class="label">Mint Condition</span>
+          <span class="arrow">→</span>
+        </a>
+      </div>
+
+      <div class="foot">© <span id="y"></span> Coleman VII</div>
+    </section>
+  </main>
 
   <script>
+    // year
     document.getElementById("y").textContent = new Date().getFullYear();
+
+    // theme: default to saved, else OS preference
+    const root = document.documentElement;
+    const saved = localStorage.getItem("theme");
+    const prefersLight = window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches;
+
+    function setTheme(t){
+      root.setAttribute("data-theme", t);
+      localStorage.setItem("theme", t);
+      document.getElementById("modeLabel").textContent = (t === "light") ? "Light" : "Dark";
+    }
+
+    if (saved) setTheme(saved);
+    else setTheme(prefersLight ? "light" : "dark");
+
+    document.getElementById("modeBtn").addEventListener("click", () => {
+      const current = root.getAttribute("data-theme") || "dark";
+      setTheme(current === "dark" ? "light" : "dark");
+    });
   </script>
 </body>
 </html>
